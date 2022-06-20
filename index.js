@@ -10,7 +10,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import {Store, Persistor } from './src/redux/store';
 
-const AppWrapper = () => {
+const AppWrapper = ({navigation}) => {
     return (
 	    <Provider store={Store}>
 	    <PersistGate loading={null} persistor={Persistor}>
