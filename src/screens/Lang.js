@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   textLang:{
     color:'white',
-    fontWeight:'300'
+    fontFamily:'OpenSans-Regular',
   }
   
   

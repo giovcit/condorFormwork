@@ -11,6 +11,6 @@ export default {
           headerTitleAlign: 'center',
           drawerPosition:'right',
           headerTitleStyle: {
-            fontWeight: '100',
+            fontFamily:'SybillaPro-Bold'
           },
 }

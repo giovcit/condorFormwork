@@ -65,7 +65,7 @@ const data = [
             <ImageBackground source={uri} style={stylesCarousel.imageBackground}   imageStyle={{ borderRadius: 3}}
       >
               <View style={stylesCarousel.TextContainer}>
-                <Text style={stylesCarousel.rightText}>{item.title}</Text>
+                <Text style={stylesCarousel.centerText}>{item.title}</Text>
               </View>
             </ImageBackground>
           </TouchableOpacity>
@@ -129,11 +129,11 @@ const data = [
       borderTopLeftRadius: 5,
       borderBottomLeftRadius: 5,
     },
-    rightText: {
+    centerText: {
       color: 'white',
-      fontWeight:'bold',
-      fontSize:20,
-      marginBottom:10
+      fontFamily:'SybillaPro-Bold',
+      fontSize:23,
+      marginBottom:20
       },
     lowerContainer: {
       flex: 1,

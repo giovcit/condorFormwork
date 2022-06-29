@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 22,
+    fontFamily:'SybillaPro-Bold',
     color:'black',
     marginTop:3,
     marginLeft:20

@@ -4,50 +4,68 @@ import {
     Pressable,
     View,
     StyleSheet,
-    Linking
+    Linking,
+    Text
 } from "react-native";
 
 const data = [
     {
-        title:'facebook',
+        title:'linkedin',
         applink:'',
-        weblink:'',
-        icon:require(),
+        weblink:'https://www.linkedin.com/companies/condor-group-s.p.a.',
+        icon:require('../../../img/ln-social.png'),
+    },
+    {
+      title:'facebook',
+      applink:'',
+      weblink:'https://www.facebook.com/condorcasseforme',
+      icon:require('../../../img/fb-social.png'),
+    },
+    {
+      title:'instagram',
+      applink:'',
+      weblink:'https://instagram.com/condorscaform',
+      icon:require('../../../img/insta-social.png'),
+    },
+    {
+      title:'youtube',
+      applink:'',
+      weblink:'https://www.youtube.com/user/condorspa',
+      icon:require('../../../img/yt-social.png'),
     },
 ];
 
 const createSocial = () => {
     let social = [];
     for (var item in data){
-      let {title,link,icon } = data[item];
+      let {title,applink,weblink,icon } = data[item];
       social.push(<Pressable key={title}
         style={styles.menuItem}
-        onPress={handlePress}>
-            <Image resizeMode="cover"/>
+        onPress={() => OpenURLButton({applink,weblink})}>
+            <Image style={styles.tbSocial} resizeMode="contain" source={icon} />
+            <Text>{applink}</Text>
         </Pressable>
         );
-        if ( type === 'secondary' && firstSubCase) firstSubCase = false;
     }
     
   
-    return menu;
+    return social;
   }
 
 
 
-const OpenURLButton = ({ url, children }) => {
-  const handlePress = useCallback(async () => {
+const OpenURLButton = ({ applink, weblink }) => {
     // Checking if the link is supported for links with custom URL scheme.
-    const supported = await Linking.canOpenURL(url);
+    console.log(applink+'-'+weblink);
+    const supported = applink !== '' ? Linking.canOpenURL(applink) : false;
 
     if (supported) {
       // Opening the link with some app, if the URL scheme is "http" the web link should be opened
       // by some browser in the mobile
-      await Linking.openURL(url);
+      Linking.openURL(applink);
     } else {
-      Alert.alert(`Don't know how to open this URL: ${url}`);
+      Linking.openURL(weblink)
     }
-  }, [url]);
 
 };
 
@@ -55,8 +73,8 @@ const OpenURLButton = ({ url, children }) => {
 
 const SocialBar = () => {
 
-    return <View>
-        
+    return <View style={styles.containerSocial}>
+        {createSocial()}
     </View>;
 
 
@@ -64,7 +82,18 @@ const SocialBar = () => {
 
 
 const styles = StyleSheet.create({
-
+  containerSocial:{
+    flexDirection:'row',
+    paddingLeft:20,
+    marginTop:10,
+    textAlign:"right",
+  },
+  tbSocial:{
+    width:30,
+    height:30,
+    marginRight:25,
+    marginTop:10,
+  }
 });
 
 

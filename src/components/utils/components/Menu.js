@@ -13,6 +13,8 @@ import {
 import { setCurrentScreen } from "../../../redux/actions";
 import Colors from "./Colors";
 import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native-gesture-handler";
+import SocialBar from "./SocialBar";
 
 
 const win = Dimensions.get('window');
@@ -78,8 +80,11 @@ const data = [
   const createMenu = (navigate) => {
     let menu = [];
     var firstSubCase = true;
+    var lastSubCase = false;
     for (var item in data){
       let {title,component,type } = data[item];
+      if (item == data.length-1) { lastSubCase = true;}
+      
       menu.push(<Pressable key={title}
         style={styles.menuItem}
         onPress={() =>
@@ -87,9 +92,12 @@ const data = [
             lang:'it'
           })
           }>
+            
             { type === 'primary' ?  <Text style={styles.textItem}>{title}</Text> : <></>  }
             { type === 'secondary' && firstSubCase ? <Text style={{...styles.textSubItem,marginTop:30}}>{title}</Text> : <></>}
-            { type === 'secondary' && !firstSubCase ? <Text style={styles.textSubItem}>{title}</Text> : <></>}
+            { type === 'secondary' && !firstSubCase && !lastSubCase ? <Text style={styles.textSubItem}>{title}</Text> : <></>}
+            { type === 'secondary' && !firstSubCase && lastSubCase ? <Text style={{...styles.textSubItem,borderBottomColor:'rgba(0,0,0,0)'}}>{title}</Text> : <></>}
+            
             
         </Pressable>
         );
@@ -117,7 +125,11 @@ const Menu = () => {
                 <Image resizeMode="contain" style={styles.logoWhite} source={require('../../../img/logoWhite.png')}/>
                 <Pressable onPress={() => navigation.goBack() }><Image resizeMode="contain" style={styles.closeWhite} source={require('../../../img/icon-close.png')}/></Pressable>
             </View>
-          {createMenu(navigation.navigate)}
+            <ScrollView>
+            {createMenu(navigation.navigate)}
+            <SocialBar/>
+            </ScrollView>
+          
           </ImageBackground>
         </View>
       </SafeAreaView> 
@@ -156,19 +168,20 @@ const styles = StyleSheet.create({
     },
     textItem:{
       color:'white',
-      fontWeight:'300',
-      fontSize:32
+      fontFamily:'SybillaPro-Bold',
+      fontSize:30,
+      marginTop:12,
 
     },
     textSubItem:{
       color:'white',
-      fontWeight:'300',
       fontSize:18,
       paddingTop:10,
       paddingBottom:10,
       borderBottomColor:'#740008',
       borderBottomWidth:1,
-      width:win.width-40
+      width:win.width-40,
+      fontFamily:'OpenSans-Regular'
 
     }
     

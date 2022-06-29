@@ -86,7 +86,8 @@ const styles = StyleSheet.create({
     textAlign:'center',
     fontSize:10,
     marginTop:3,
-    textAlign:'center'
+    textAlign:'center',
+    fontFamily:'OpenSans-Medium'
   }
 
 
