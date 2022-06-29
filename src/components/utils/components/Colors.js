@@ -16,5 +16,7 @@ export default {
   dark: '#444',
   darker: '#222',
   black: '#000',
-  redCondor:'#D3010E'
+  redCondor:'#D3010E',
+  backgroundPrimary:'#F2F2F2'
+
 };

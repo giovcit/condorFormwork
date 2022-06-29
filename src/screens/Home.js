@@ -1,4 +1,7 @@
-import React from 'react';
+import React,{
+  useRef,
+  useState
+} from 'react';
 import {
     SafeAreaView,
     ScrollView,
@@ -7,66 +10,96 @@ import {
     Text,
     useColorScheme,
     View,
+    Image,
+    Dimensions,
+    TouchableOpacity,
+    ImageBackground
   } from 'react-native';
   
-  import {
-    //DebugInstructions,
-    //Header,
-    Colors,
-    //LearnMoreLinks,
-    //ReloadInstructions,
-  } from '../components/utils';
+import { 
+  Colors,
+} from '../components/utils';
+import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
+import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
+import { setCurrentScreen } from '../redux/actions';
+import { useDispatch } from 'react-redux';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import Slide from '../components/utils/components/Slide';
 
-  
+const win = Dimensions.get('window');
+const ratio = win.width / 200;
 
 
 const Home = ({navigation,route}) => {
     const isDarkMode = useColorScheme() === 'dark';
     const { lang } = route.params;
+    
+    const dispatch = useDispatch();
+    dispatch(setCurrentScreen('Home'));
+    
 
     const backgroundStyle = {
       backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     };
-  return <></>;
+
+  
     return (
-      <SafeAreaView style={backgroundStyle}>
+      <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
+          >
           <View
             style={{
-              backgroundColor: isDarkMode ? Colors.black : Colors.white,
+              backgroundColor: Colors.backgroundPrimary,
+              paddingBottom:75
             }}>
-            <Section title="Step One">
-              The lang is {lang}
-              Edit <Text style={styles.highlight}>App.js</Text> to change this
-              screen and then come back to see your edits.
-            </Section>
-            <Section title="See Your Changes">
-              <ReloadInstructions />
-            </Section>
-            <Section title="Debug">
-              <DebugInstructions />
-            </Section>
-            <Section title="Learn More">
-              Read the docs to discover what to do next:
-            </Section>
-            <LearnMoreLinks />
+            <Pressable style={styles.sectionNews} onPress={() => console.log('Go To News')}>
+              <Image source={require('../img/news.png')} style={{width:win.width,height:win.height/3}}/>
+            </Pressable>
+            <View style={styles.sectionContainer}>
+              <Text style={styles.sectionTitle}>Il Mondo Condor</Text>
+              <Slide/>
+            </View>
           </View>
         </ScrollView>
+        <ConsulenzaBar/>
+        <CustomBottomToolbar/>
       </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+    marginLeft:15,
+    marginright:15,
+    marginTop:15, 
+    flex:1,
+    alignSelf:'stretch',
+    textAlign:'center',
+  },
+  sectionPressable:{
+    backgroundColor:'red',
+    alignSelf:'stretch',
+    textAlign:'center',
+
+  },
+  sectionNews: {
+    flex:1,
+    alignSelf:'stretch',
+    textAlign:'center',
+  },
+  backgroundStyle:{
+    flex:1,
+    
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: 'bold',
+    color:'black',
+    marginTop:3,
+    marginLeft:20
+
   },
   sectionDescription: {
     marginTop: 8,
@@ -77,5 +110,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
 
 export default Home;

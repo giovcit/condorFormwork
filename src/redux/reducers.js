@@ -4,6 +4,7 @@
  */
 import {
     SET_FCM_TOKEN,
+    SET_CURRENT_SCREEN
 } from './actions';
 // import {
 //     AUTH_ROLE_USER,
@@ -15,6 +16,7 @@ import '../globals';
  */
 const initialState = {
     fcm: { token: '', device_id: '',device_name:'',device_os:'', timestamp: new Date().getTime(),fid:'' },
+    screen: {component:''}
 };
 
 function FpReducer(state = initialState, action) {
@@ -22,6 +24,8 @@ function FpReducer(state = initialState, action) {
     
     case SET_FCM_TOKEN:
       return { ...state, fcm: { ...state.fcm, token: action.payload, timestamp: new Date().getTime() } }; 
+    case SET_CURRENT_SCREEN:
+      return {...state, screen:{ component:action.payload }}
     default:
       return state;
   }

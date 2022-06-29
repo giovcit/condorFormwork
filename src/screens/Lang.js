@@ -9,6 +9,8 @@ import { Button,
          StatusBar,
          Pressable
         } from 'react-native';
+import { setCurrentScreen } from '../redux/actions';
+import { useDispatch } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen'
 
 const lang = {
@@ -46,7 +48,7 @@ const createLang = (navigate) => {
         })
         }
       onPressIn={() => {}}>
-        <Image source={imageSource}></Image>
+        <Image style={{width:70,resizeMode:'contain'}} source={imageSource}></Image>
         <Text style={styles.textLang}>{title}</Text>
       </Pressable>);
   }
@@ -56,6 +58,9 @@ const createLang = (navigate) => {
 
 
 const Lang = ({navigation:{ navigate }}) => {
+
+  const dispatch = useDispatch();
+  dispatch(setCurrentScreen('Lang'))
 
 
 

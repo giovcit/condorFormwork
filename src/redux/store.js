@@ -11,7 +11,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['fcm'],
+  whitelist: ['fcm','screen'],
 };
 
 const rootReducer = combineReducers({ FpReducer: persistReducer(persistConfig, FpReducer) });
