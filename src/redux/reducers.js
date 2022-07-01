@@ -16,7 +16,8 @@ import '../globals';
  */
 const initialState = {
     fcm: { token: '', device_id: '',device_name:'',device_os:'', timestamp: new Date().getTime(),fid:'' },
-    screen: {component:''}
+    screen: {component:''}, 
+    soluzioni:[],
 };
 
 function FpReducer(state = initialState, action) {
@@ -26,6 +27,7 @@ function FpReducer(state = initialState, action) {
       return { ...state, fcm: { ...state.fcm, token: action.payload, timestamp: new Date().getTime() } }; 
     case SET_CURRENT_SCREEN:
       return {...state, screen:{ component:action.payload }}
+      
     default:
       return state;
   }
