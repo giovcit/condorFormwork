@@ -6,7 +6,8 @@ import {
     Dimensions,
     ScrollView,
     SafeAreaView,
-    View
+    View,
+    Image
 } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useSelector } from 'react-redux';
@@ -32,36 +33,60 @@ const CardList = () => {
 
    return (
     <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
-        <ScrollView>{soluzioni.map((post,index) => (
-                <Pressable key={post.id}>
-                <ImageBackground source={{uri:post.featuredImage}} style={styles.imageBackground}   imageStyle={{ borderRadius: 3}}/>
+        <ScrollView style={styles.viewStyle}>{soluzioni.map((post,index) => (
+                <Pressable style={styles.cardContainer} key={post.id}>
+                <ImageBackground resizeMode='cover' source={{uri:post.featuredImage}} style={styles.imageBackground}   imageStyle={{ borderRadius: 3}}>
                 <View style={styles.TextContainer}>
-                    <Text style={styles.centerText}>{post.name}</Text>
+                    <Text style={styles.leftText}>{post.name}</Text>
+                    <Image resizeMode='cover' source={{uri:post.iconImage}}style={styles.piantaImage}/>
                  </View>
+                 </ImageBackground>
             </Pressable>))} 
         </ScrollView>
     </SafeAreaView>);
     
     }
 
+const innerSpaceCard = win.width-28-28;
+const cardHeight = win.width/3;
 
 const styles = StyleSheet.create({
+    viewStyle: {
+        marginBottom:14,
+    },
+    cardContainer: {
+        paddingTop:14,
+        paddingLeft:14,
+        paddingRight:14
+    },
+    piantaImage: {
+        width:(innerSpaceCard)/5,
+        height:cardHeight-cardHeight/3,
+        textAlign:'left',
+    },
     TextContainer: {
-        alignItems:'center',
+        alignItems:'baseline',
         padding: 3,
         marginTop: 3,
-        borderTopLeftRadius: 5,
-        borderBottomLeftRadius: 5,
+        marginLeft:14,
+        width:innerSpaceCard,
+        flexDirection:'row',
+        justifyContent:'space-between',
       },
-      centerText: {
+      leftText: {
         color: 'white',
         fontFamily:'SybillaPro-Bold',
-        fontSize:23,
-        marginBottom:20
+        fontSize:20,
+        marginBottom:14,
+        width:((innerSpaceCard)/5)*4,
+        textAlign:'left'
+
         },
     imageBackground: {
-        flex: 2,
-        paddingTop:win.height/3,
+        flex: 1,
+        paddingTop:cardHeight/3,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
       },
 })
 

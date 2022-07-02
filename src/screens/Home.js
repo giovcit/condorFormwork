@@ -54,23 +54,29 @@ const Home = ({navigation,route}) => {
               //console.log('SOL: '+JSON.stringify(soluzioni));
 
               for (var s in newSoluzioni){
-      
-      
                   const response = await fetch(MEDIA_API+'/'+newSoluzioni[s].acf.main_image+'?_fields[]=id&_fields[]=media_details');
-                          if(!response.ok) {
-                              // oups! something went wrong
-                              console.log(response);
-                              return;
-                          }
-          
-                          //console.log('RESPONSE:'+response);
-                 
-                          const m = await response.json();
-                          newSoluzioni[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
-                          //console.log(JSON.stringify(newSoluzioni[s]))
+                  if(!response.ok) {
+                    // oups! something went wrong
+                    console.log(response);
+                    return;
                   }
+                  //console.log('RESPONSE:'+response);
+                  const m = await response.json();
+                  newSoluzioni[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
+                  //console.log(JSON.stringify(newSoluzioni[s]))
+                  const responseIcon = await fetch(MEDIA_API+'/'+newSoluzioni[s].acf.main_solution_icon+'?_fields[]=id&_fields[]=media_details');
+                  if(!responseIcon.ok) {
+                    // oups! something went wrong
+                    console.log(responseIcon);
+                    return;
+                  }
+                  //console.log('RESPONSE:'+response);
+                  const icon = await responseIcon.json();
+                  newSoluzioni[s].iconImage = UPLOADS_DIR+'/'+icon.media_details.file;
+                  //console.log(JSON.stringify(newSoluzioni[s]))
+              }
           
-                  return await newSoluzioni;
+              return await newSoluzioni;
   }
 
 

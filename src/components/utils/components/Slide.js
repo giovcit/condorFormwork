@@ -54,7 +54,7 @@ const data = [
         const {uri, title, content} = item;
         return (
           <TouchableOpacity
-            activeOpacity={1}
+            activeOpacity={0.9}
             style={stylesCarousel.item}
             onPress={() =>
               navigation.navigate(item.component,{
