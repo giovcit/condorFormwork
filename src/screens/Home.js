@@ -1,4 +1,5 @@
 import React,{
+  useEffect,
   useRef,
   useState
 } from 'react';
@@ -21,8 +22,12 @@ import {
 } from '../components/utils';
 import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
 import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
-import { setCurrentScreen } from '../redux/actions';
-import { useDispatch } from 'react-redux';
+import { 
+  setCurrentScreen,
+  loadSoluzioni
+ } from '../redux/actions';
+ import '../globals';
+import { useDispatch, useSelector } from 'react-redux';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Slide from '../components/utils/components/Slide';
 
@@ -35,12 +40,55 @@ const Home = ({navigation,route}) => {
     const { lang } = route.params;
     
     const dispatch = useDispatch();
-    dispatch(setCurrentScreen('Home'));
+    const { soluzioni } =  useSelector(state => state.CoReducer);
+
+    const getCategorySoluzioni = async () => {
+      const response = await fetch(CATEGORY_SOLUZIONI_API+'?_fields[]=id&_fields[]=name&_fields[]=acf');
+              if(!response.ok) {
+                  // oups! something went wrong
+                  console.log(response);
+                  return;
+              }
+     
+              const newSoluzioni = await response.json();
+              //console.log('SOL: '+JSON.stringify(soluzioni));
+
+              for (var s in newSoluzioni){
+      
+      
+                  const response = await fetch(MEDIA_API+'/'+newSoluzioni[s].acf.main_image+'?_fields[]=id&_fields[]=media_details');
+                          if(!response.ok) {
+                              // oups! something went wrong
+                              console.log(response);
+                              return;
+                          }
+          
+                          //console.log('RESPONSE:'+response);
+                 
+                          const m = await response.json();
+                          newSoluzioni[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
+                          //console.log(JSON.stringify(newSoluzioni[s]))
+                  }
+          
+                  return await newSoluzioni;
+  }
+
+
+    
+  //dispatch(setCurrentScreen('Home'));
+  (async () => {
+    dispatch(loadSoluzioni(await getCategorySoluzioni()));
+
+  })();
+  
+    
     
 
     const backgroundStyle = {
       backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     };
+
+    
 
   
     return (

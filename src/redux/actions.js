@@ -11,6 +11,7 @@ import { Share } from 'react-native';
 
 export const SET_FCM_TOKEN = 'SET_FCM_TOKEN';
 export const SET_CURRENT_SCREEN = 'SET_CURRENT_SCREEN';
+export const LOAD_SOLUZIONI = 'LOAD_SOLUZIONI'
 
 export const setFcmToken = token => dispatch => {
   console.log('actions setFcmToken', token);
@@ -19,6 +20,16 @@ export const setFcmToken = token => dispatch => {
     payload: token,
   });
 };
+
+export const loadSoluzioni = categorie => dispatch => {
+console.log('categorie in load soluzioni: '+JSON.stringify(categorie));
+dispatch({
+  type: LOAD_SOLUZIONI,
+  payload:categorie
+});
+
+
+}
 
 export const setCurrentScreen = component => dispatch => {
   console.log('actions setScreen', component);

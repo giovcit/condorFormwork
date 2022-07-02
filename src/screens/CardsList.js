@@ -9,51 +9,26 @@ import {
     View
 } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { useSelector } from 'react-redux';
 import '../globals';
 
 const win = Dimensions.get('window');
 const ratio = win.width / 200;
 
 const CardList = () => {
-    const [soluzioni,setSoluzioni] = useState([]);  
+    //const [soluzioni,setSoluzioni] = useState([]);  
 
-    const getCategorySoluzioni = async () => {
-        const response = await fetch(CATEGORY_SOLUZIONI_API+'?_fields[]=id&_fields[]=name&_fields[]=acf');
-                if(!response.ok) {
-                    // oups! something went wrong
-                    console.log(response);
-                    return;
-                }
-       
-                const newSoluzioni = await response.json();
-                //console.log('SOL: '+JSON.stringify(soluzioni));
-
-                for (var s in newSoluzioni){
-        
-        
-                    const response = await fetch(MEDIA_API+'/'+newSoluzioni[s].acf.main_image+'?_fields[]=id&_fields[]=media_details');
-                            if(!response.ok) {
-                                // oups! something went wrong
-                                console.log(response);
-                                return;
-                            }
-            
-                            //console.log('RESPONSE:'+response);
-                   
-                            const m = await response.json();
-                            newSoluzioni[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
-                            console.log(JSON.stringify(newSoluzioni[s].featuredImage))
-                    }
-            
-                    setSoluzioni(newSoluzioni)
-    }
 
    
 
-    useEffect(() => {
-            getCategorySoluzioni();        
-       }, []);
+    //useEffect(() => {
+      //      getCategorySoluzioni();        
+       //}, []);
 
+    const { soluzioni,test } =  useSelector(state => state.CoReducer);
+
+    //console.log('TEST: '+JSON.stringify(test));
+    console.log('SOLUZIONI IN CARD: '+JSON.stringify(soluzioni));
 
    return (
     <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
