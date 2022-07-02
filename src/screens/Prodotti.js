@@ -20,7 +20,8 @@ const ratio = win.width / 200;
 const CardList = ({navigation,route}) => {
 
 
-    //console.log('SOLUZIONI IN CARD: '+JSON.stringify(soluzioni));
+    //console.log('SOLUZIONI IN CARD: '+JSON.stringify(soluzioni));prodotti.filter(p => (p.soluzioni === idProd))
+    //console.log(route.params.idProd);
 
    return (
     <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
@@ -31,11 +32,14 @@ const CardList = ({navigation,route}) => {
     
 }
 
-const Prodotti = () => {
+const Prodotti = (props) => {
     const { prodotti } =  useSelector(state => state.CoReducer);
-    console.log(prodotti);
+    const navigation = useNavigation();
+    const { idProd,nameProd } = props.props;
+    navigation.setOptions({title:nameProd});
+    
     return (<>
-    {prodotti.map((post,index) => (
+    {prodotti.filter(p => (p.soluzioni == idProd)).map((post,index) => (
         <Pressable style={styles.cardContainer} key={post.id}>
         <ImageBackground resizeMode='cover' source={{uri:post.featuredImage}} style={styles.imageBackground}   imageStyle={{ borderRadius: 3}}>
         <View style={styles.TextContainer}>
@@ -44,7 +48,7 @@ const Prodotti = () => {
          </View>
          </ImageBackground>
     </Pressable>))}</>
-    );
+    );  
 }
 
 const innerSpaceCard = win.width-28-28;
@@ -75,11 +79,11 @@ const styles = StyleSheet.create({
       leftTextProdotti:{
         color: 'white',
         fontFamily:'SybillaPro-Bold',
-        fontSize:20,
+        fontSize:18,
         marginBottom:14,
         width:((innerSpaceCard)/5)*4,
         textAlign:'left',
-        width:innerSpaceCard
+        width:innerSpaceCard,
       },
         imageBackground: {
         flex: 1,

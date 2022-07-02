@@ -41,7 +41,8 @@ const Soluzioni = () => {
             navigation.navigate('Prodotti',{
               lang:'it',
               case:'prodotti',
-              idProd:post.id
+              idProd:post.id,
+              nameProd:post.name
             })
             }
         style={styles.cardContainer} key={post.id}>
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
       leftText: {
         color: 'white',
         fontFamily:'SybillaPro-Bold',
-        fontSize:20,
+        fontSize:18,
         marginBottom:14,
         width:((innerSpaceCard)/5)*4,
         textAlign:'left'

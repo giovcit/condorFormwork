@@ -37,7 +37,7 @@ export const getCategorySoluzioni = async () => {
 }
 
 export const getProdottiSoluzioni = async () => {
-    const response = await fetch(PRODOTTI_SOLUZIONI_API+'?per_page=100&_fields[]=id&_fields[]=title&_fields[]=featured_media');
+    const response = await fetch(PRODOTTI_SOLUZIONI_API+'?per_page=100&_fields[]=id&_fields[]=title&_fields[]=soluzioni&_fields[]=featured_media');
             if(!response.ok) {
                 // oups! something went wrong
                 console.log(response);
