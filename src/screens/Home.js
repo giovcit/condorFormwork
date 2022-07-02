@@ -24,12 +24,14 @@ import CustomBottomToolbar from '../components/utils/components/CustomBottomTool
 import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
 import { 
   setCurrentScreen,
-  loadSoluzioni
+  loadSoluzioni,
+  loadProdotti
  } from '../redux/actions';
- import '../globals';
+import '../globals';
 import { useDispatch, useSelector } from 'react-redux';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Slide from '../components/utils/components/Slide';
+import { getCategorySoluzioni,getProdottiSoluzioni } from '../components/utils/components/Board';
 
 const win = Dimensions.get('window');
 const ratio = win.width / 200;
@@ -40,63 +42,22 @@ const Home = ({navigation,route}) => {
     const { lang } = route.params;
     
     const dispatch = useDispatch();
-    const { soluzioni } =  useSelector(state => state.CoReducer);
-
-    const getCategorySoluzioni = async () => {
-      const response = await fetch(CATEGORY_SOLUZIONI_API+'?_fields[]=id&_fields[]=name&_fields[]=acf');
-              if(!response.ok) {
-                  // oups! something went wrong
-                  console.log(response);
-                  return;
-              }
-     
-              const newSoluzioni = await response.json();
-              //console.log('SOL: '+JSON.stringify(soluzioni));
-
-              for (var s in newSoluzioni){
-                  const response = await fetch(MEDIA_API+'/'+newSoluzioni[s].acf.main_image+'?_fields[]=id&_fields[]=media_details');
-                  if(!response.ok) {
-                    // oups! something went wrong
-                    console.log(response);
-                    return;
-                  }
-                  //console.log('RESPONSE:'+response);
-                  const m = await response.json();
-                  newSoluzioni[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
-                  //console.log(JSON.stringify(newSoluzioni[s]))
-                  const responseIcon = await fetch(MEDIA_API+'/'+newSoluzioni[s].acf.main_solution_icon+'?_fields[]=id&_fields[]=media_details');
-                  if(!responseIcon.ok) {
-                    // oups! something went wrong
-                    console.log(responseIcon);
-                    return;
-                  }
-                  //console.log('RESPONSE:'+response);
-                  const icon = await responseIcon.json();
-                  newSoluzioni[s].iconImage = UPLOADS_DIR+'/'+icon.media_details.file;
-                  //console.log(JSON.stringify(newSoluzioni[s]))
-              }
-          
-              return await newSoluzioni;
-  }
+    const { soluzioni,prodotti } =  useSelector(state => state.CoReducer);
 
 
     
-  //dispatch(setCurrentScreen('Home'));
+  //BOOTSTRAP CONTENT
+  //VIA WORDPRESS API
   (async () => {
     dispatch(loadSoluzioni(await getCategorySoluzioni()));
+    dispatch(loadProdotti(await getProdottiSoluzioni()));
 
   })();
-  
-    
-    
 
     const backgroundStyle = {
       backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
     };
 
-    
-
-  
     return (
       <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />

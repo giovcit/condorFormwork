@@ -5,7 +5,8 @@
 import {
     SET_FCM_TOKEN,
     SET_CURRENT_SCREEN,
-    LOAD_SOLUZIONI
+    LOAD_SOLUZIONI,
+    LOAD_PRODOTTI
 } from './actions';
 // import {
 //     AUTH_ROLE_USER,
@@ -19,6 +20,7 @@ const initialState = {
     fcm: { token: '', device_id: '',device_name:'',device_os:'', timestamp: new Date().getTime(),fid:'' },
     screen: {component:''}, 
     soluzioni:[],
+    prodotti:[],
     test:[{id:'1',size:'2',index:'3'},{id:'1',size:'2',index:'3'}]
 };
 
@@ -30,10 +32,16 @@ function CoReducer(state = initialState, action) {
     case SET_CURRENT_SCREEN:
       return {...state, screen:{ component:action.payload }}
     case LOAD_SOLUZIONI:
-      console.log('PAYLOAD: '+JSON.stringify(action.payload));
+      //console.log('PAYLOAD: '+JSON.stringify(action.payload));
       return {
         ...state,
         soluzioni:action.payload,
+      }
+    case LOAD_PRODOTTI:
+      //console.log('PAYLOAD: '+JSON.stringify(action.payload));
+      return {
+        ...state,
+        prodotti:action.payload,
       }
     default:
       return state;

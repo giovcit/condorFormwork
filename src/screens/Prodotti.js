@@ -25,36 +25,27 @@ const CardList = ({navigation,route}) => {
    return (
     <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
         <ScrollView style={styles.viewStyle}>
-           <Soluzioni/>
+           <Prodotti props={route.params}/>
         </ScrollView>
     </SafeAreaView>);
     
 }
 
-const Soluzioni = () => {
-    const { soluzioni } =  useSelector(state => state.CoReducer);
-    const navigation = useNavigation();
+const Prodotti = () => {
+    const { prodotti } =  useSelector(state => state.CoReducer);
+    console.log(prodotti);
     return (<>
-    {soluzioni.map((post,index) => (
-        <Pressable 
-        onPress={() =>
-            navigation.navigate('Prodotti',{
-              lang:'it',
-              case:'prodotti',
-              idProd:post.id
-            })
-            }
-        style={styles.cardContainer} key={post.id}>
+    {prodotti.map((post,index) => (
+        <Pressable style={styles.cardContainer} key={post.id}>
         <ImageBackground resizeMode='cover' source={{uri:post.featuredImage}} style={styles.imageBackground}   imageStyle={{ borderRadius: 3}}>
         <View style={styles.TextContainer}>
-            <Text style={styles.leftText}>{post.name}</Text>
+            <Text style={styles.leftTextProdotti}>{post.title.rendered}</Text>
             <Image resizeMode='cover' source={{uri:post.iconImage}}style={styles.piantaImage}/>
          </View>
          </ImageBackground>
     </Pressable>))}</>
     );
 }
-
 
 const innerSpaceCard = win.width-28-28;
 const cardHeight = win.width/3;
@@ -81,14 +72,15 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
       },
-      leftText: {
+      leftTextProdotti:{
         color: 'white',
         fontFamily:'SybillaPro-Bold',
         fontSize:20,
         marginBottom:14,
         width:((innerSpaceCard)/5)*4,
-        textAlign:'left'
-        },
+        textAlign:'left',
+        width:innerSpaceCard
+      },
         imageBackground: {
         flex: 1,
         paddingTop:cardHeight/3,

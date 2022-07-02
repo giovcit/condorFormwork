@@ -58,7 +58,8 @@ const data = [
             style={stylesCarousel.item}
             onPress={() =>
               navigation.navigate(item.component,{
-                lang:'it'
+                lang:'it',
+                case:'soluzioni'
               })
               }
             >

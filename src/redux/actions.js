@@ -11,7 +11,8 @@ import { Share } from 'react-native';
 
 export const SET_FCM_TOKEN = 'SET_FCM_TOKEN';
 export const SET_CURRENT_SCREEN = 'SET_CURRENT_SCREEN';
-export const LOAD_SOLUZIONI = 'LOAD_SOLUZIONI'
+export const LOAD_SOLUZIONI = 'LOAD_SOLUZIONI';
+export const LOAD_PRODOTTI = 'LOAD_PRODOTTI';
 
 export const setFcmToken = token => dispatch => {
   console.log('actions setFcmToken', token);
@@ -22,12 +23,19 @@ export const setFcmToken = token => dispatch => {
 };
 
 export const loadSoluzioni = categorie => dispatch => {
-console.log('categorie in load soluzioni: '+JSON.stringify(categorie));
+//console.log('categorie in load soluzioni: '+JSON.stringify(categorie));
 dispatch({
   type: LOAD_SOLUZIONI,
   payload:categorie
 });
+}
 
+export const loadProdotti = prodotti => dispatch => {
+  //console.log('prodotti in load prodotti: '+JSON.stringify(prodotti));
+  dispatch({
+    type: LOAD_PRODOTTI,
+    payload:prodotti
+  });
 
 }
 

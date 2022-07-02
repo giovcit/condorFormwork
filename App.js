@@ -14,6 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Home from './src/screens/Home';
 import CardList from './src/screens/CardsList';
 import Lang from './src/screens/Lang';
+import Prodotti from './src/screens/Prodotti'
 import TopBar from './src/components/utils/components/TopBar';
 import Hamburger from './src/components/utils/components/Hamburger';
 import Menu from './src/components/utils/components/Menu';
@@ -56,6 +57,17 @@ console.log(navigation);
           <Stack.Screen
             name="CardList"
             component={CardList}
+            options={
+              ({ route }) => (
+                { 
+                  title: 'Soluzioni',
+                }
+              )
+            }
+          />
+          <Stack.Screen
+            name="Prodotti"
+            component={Prodotti}
           />
         </Stack.Navigator>
       </NavigationContainer>
