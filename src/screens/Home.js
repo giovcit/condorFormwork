@@ -49,12 +49,15 @@ const Home = ({navigation,route}) => {
     
   //BOOTSTRAP CONTENT
   //VIA WORDPRESS API
-  (async () => {
-    dispatch(loadSoluzioni(await getCategorySoluzioni()));
-    dispatch(loadProdotti(await getProdottiSoluzioni()));
-    dispatch(loadProgetti(await getProgetti()));
-
-  })();
+  useEffect(() => {
+    (async () => {
+      if (soluzioni.length < 1 ) dispatch(loadSoluzioni(await getCategorySoluzioni()));
+      if (prodotti.length < 1 ) dispatch(loadProdotti(await getProdottiSoluzioni()));
+      if (prodotti.length < 1) dispatch(loadProgetti(await getProgetti()));
+  
+    })();
+  },[])
+  
 
     const backgroundStyle = {
       backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,

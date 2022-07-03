@@ -11,6 +11,7 @@ import {
     Image
 } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useSelector } from 'react-redux';
 import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
 import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
     cardContainer: {
         paddingTop:14,
         paddingLeft:14,
-        paddingRight:14
+        paddingRight:14,
     },
     piantaImage: {
         width:(innerSpaceCard)/5,
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
         paddingTop:cardHeight/3,
         borderTopLeftRadius: 5,
         borderBottomLeftRadius: 5,
+        
       },
 })
 
