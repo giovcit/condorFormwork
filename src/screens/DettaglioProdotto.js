@@ -9,14 +9,25 @@ import {
     Image,
     View
 } from 'react-native';
+import RenderHtml from 'react-native-render-html';
+import ConsulenzaBar from "../components/utils/components/ConsulenzaBar";
+import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
+
+
 
 const win = Dimensions.get('window');
+const marginDettaglio = 16;
+const paddingDettaglio = 16;
+const innnerDettaglio = win.width-(marginDettaglio*2);
 
 const DettaglioProdotto = ({navigation,route}) => {
 
     const {id,title,soluzioni,featuredImage,content} = route.params.dataProdotto;
     navigation.setOptions({title:title.rendered});
     console.log('PARAMS: '+JSON.stringify(route.params.dataProdotto));
+    const source = {
+        html: content.rendered
+      };
     return (<>
         <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
             <ScrollView style={styles.viewStyle}>
@@ -26,10 +37,16 @@ const DettaglioProdotto = ({navigation,route}) => {
             <View style={styles.containerDettaglio}>
                 <Text style={styles.categoryDettaglio}>{route.params.nameSoluzione}</Text>
                 <Text style={styles.categoryTitolo}>{title.rendered}</Text>
-                <Text>{content.rendered}</Text>
+                <RenderHtml
+                source={source}
+                contentWidth={innnerDettaglio}
+                style={styles.contenutoDettaglio}
+                />
             </View>
-
+            <View style={styles.emptySpace}/>
             </ScrollView>
+            <ConsulenzaBar/>
+            <CustomBottomToolbar/>
         </SafeAreaView>
 
     </>);
@@ -38,16 +55,20 @@ const DettaglioProdotto = ({navigation,route}) => {
 
 }
 
-const marginDettaglio = 16;
-const paddingDettaglio = 16;
-const innnerDettaglio = win.width-(marginDettaglio*2);
+
 
 const styles = StyleSheet.create({
+    emptySpace: {
+        height:70
+    },
     categoryDettaglio: {
         fontFamily:'OpenSans-MediumItalic',
         fontStyle:'italic',
         fontSize:12,
         color:'#B2B2B2',
+    },
+    contenutoDettaglio: {
+
     },
     categoryTitolo:{
         color:'black',
