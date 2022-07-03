@@ -77,7 +77,7 @@ const data = [
   
 
 
-  const createMenu = (navigate) => {
+  const createMenu = (navigation) => {
     let menu = [];
     var firstSubCase = true;
     var lastSubCase = false;
@@ -87,10 +87,10 @@ const data = [
       
       menu.push(<Pressable key={title}
         style={styles.menuItem}
-        onPress={() =>
-          navigate(component,{
+        onPress={() =>{
+          navigation.replace(component,{
             lang:'it'
-          })
+          })}
           }>
             
             { type === 'primary' ?  <Text style={styles.textItem}>{title}</Text> : <></>  }
@@ -117,6 +117,7 @@ const Menu = () => {
     const dispatch = useDispatch();
     dispatch(setCurrentScreen('Menu'));
     const navigation = useNavigation();
+    
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container}>
@@ -126,7 +127,7 @@ const Menu = () => {
                 <Pressable onPress={() => navigation.goBack() }><Image resizeMode="contain" style={styles.closeWhite} source={require('../../../img/icon-close.png')}/></Pressable>
             </View>
             <ScrollView>
-            {createMenu(navigation.navigate)}
+            {createMenu(navigation)}
             <SocialBar/>
             </ScrollView>
           
