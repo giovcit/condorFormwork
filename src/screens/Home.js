@@ -25,13 +25,14 @@ import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
 import { 
   setCurrentScreen,
   loadSoluzioni,
-  loadProdotti
+  loadProdotti,
+  loadProgetti
  } from '../redux/actions';
 import '../globals';
 import { useDispatch, useSelector } from 'react-redux';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Slide from '../components/utils/components/Slide';
-import { getCategorySoluzioni,getProdottiSoluzioni } from '../components/utils/components/Board';
+import { getCategorySoluzioni,getProdottiSoluzioni, getProgetti } from '../components/utils/components/Board';
 
 const win = Dimensions.get('window');
 const ratio = win.width / 200;
@@ -42,7 +43,7 @@ const Home = ({navigation,route}) => {
     const { lang } = route.params;
     
     const dispatch = useDispatch();
-    const { soluzioni,prodotti } =  useSelector(state => state.CoReducer);
+    const { soluzioni,prodotti,progetti } =  useSelector(state => state.CoReducer);
 
 
     
@@ -51,6 +52,7 @@ const Home = ({navigation,route}) => {
   (async () => {
     dispatch(loadSoluzioni(await getCategorySoluzioni()));
     dispatch(loadProdotti(await getProdottiSoluzioni()));
+    dispatch(loadProgetti(await getProgetti()));
 
   })();
 

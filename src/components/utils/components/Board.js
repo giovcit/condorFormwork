@@ -32,8 +32,34 @@ export const getCategorySoluzioni = async () => {
                 newSoluzioni[s].iconImage = UPLOADS_DIR+'/'+icon.media_details.file;
                 //console.log(JSON.stringify(newSoluzioni[s]))
             }
-        
+            console.log('SOLUZIONI LOADED !!!');
             return await newSoluzioni;
+}
+
+export const getProgetti = async () => {
+  const response = await fetch(PROGETTI_API+'?_fields[]=id&_fields[]=title&_fields[]=featured_media&_fields[]=content');
+          if(!response.ok) {
+              // oups! something went wrong
+              console.log(response);
+              return;
+          }
+ 
+          const newProgetti = await response.json();
+          //console.log('SOL: '+JSON.stringify(progetti));
+
+          for (var s in newProgetti){
+              const response = await fetch(MEDIA_API+'/'+newProgetti[s].featured_media+'?_fields[]=id&_fields[]=media_details');
+              if(!response.ok) {
+                // oups! something went wrong
+                console.log(response);
+                return;
+              }
+              //console.log('RESPONSE:'+response);
+              const m = await response.json();
+              newProgetti[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
+          }
+          console.log('PROGETTI LOADED !!!');
+          return await newProgetti;
 }
 
 export const getProdottiSoluzioni = async () => {
@@ -76,6 +102,6 @@ export const getProdottiSoluzioni = async () => {
                 //}
                 //newProdotti[s].galleryImage = listGallery;
             }
-        
+            console.log('PRODOTTI LOADED !!!');
             return await newProdotti;
 }

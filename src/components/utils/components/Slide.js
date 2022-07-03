@@ -22,7 +22,7 @@ const data = [
     {
       uri: require('../../../img/progetti-slide.png'),
       title: 'Progetti',
-      component:'CardList',
+      component:'Progetti',
     },
     {
       uri: require('../../../img/azienda-slide.png'),
@@ -59,7 +59,6 @@ const data = [
             onPress={() =>
               navigation.navigate(item.component,{
                 lang:'it',
-                case:'soluzioni'
               })
               }
             >

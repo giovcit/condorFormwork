@@ -13,6 +13,8 @@ export const SET_FCM_TOKEN = 'SET_FCM_TOKEN';
 export const SET_CURRENT_SCREEN = 'SET_CURRENT_SCREEN';
 export const LOAD_SOLUZIONI = 'LOAD_SOLUZIONI';
 export const LOAD_PRODOTTI = 'LOAD_PRODOTTI';
+export const LOAD_PROGETTI = 'LOAD_PROGETTI';
+
 
 export const setFcmToken = token => dispatch => {
   console.log('actions setFcmToken', token);
@@ -36,7 +38,14 @@ export const loadProdotti = prodotti => dispatch => {
     type: LOAD_PRODOTTI,
     payload:prodotti
   });
+}
 
+export const loadProgetti = progetti => dispatch => {
+  //console.log('prodotti in load prodotti: '+JSON.stringify(prodotti));
+  dispatch({
+    type: LOAD_PROGETTI,
+    payload:progetti
+  });
 }
 
 export const setCurrentScreen = component => dispatch => {
