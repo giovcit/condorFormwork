@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useSelector } from 'react-redux';
+import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
+import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
 import '../globals';
 
 const win = Dimensions.get('window');
@@ -19,7 +21,7 @@ const ratio = win.width / 200;
 
 const CardList = ({navigation,route}) => {
 
-
+    const { prodotti } =  useSelector(state => state.CoReducer);
     //console.log('SOLUZIONI IN CARD: '+JSON.stringify(soluzioni));prodotti.filter(p => (p.soluzioni === idProd))
     //console.log(route.params.idProd);
 
@@ -27,7 +29,10 @@ const CardList = ({navigation,route}) => {
     <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
         <ScrollView style={styles.viewStyle}>
            <Prodotti props={route.params}/>
+           <View style={styles.emptySpace}/>
         </ScrollView>
+        <ConsulenzaBar/>
+        <CustomBottomToolbar/>
     </SafeAreaView>);
     
 }
@@ -40,7 +45,17 @@ const Prodotti = (props) => {
     
     return (<>
     {prodotti.filter(p => (p.soluzioni == idProd)).map((post,index) => (
-        <Pressable style={styles.cardContainer} key={post.id}>
+        <Pressable 
+        style={styles.cardContainer} 
+        key={post.id}
+        onPress={() =>
+            navigation.navigate('DettaglioProdotto',{
+              lang:'it',
+              dataProdotto:post,
+              nameSoluzione:nameProd
+            })
+            }
+        >
         <ImageBackground resizeMode='cover' source={{uri:post.featuredImage}} style={styles.imageBackground}   imageStyle={{ borderRadius: 3}}>
         <View style={styles.TextContainer}>
             <Text style={styles.leftTextProdotti}>{post.title.rendered}</Text>
@@ -57,6 +72,9 @@ const cardHeight = win.width/3;
 const styles = StyleSheet.create({
     viewStyle: {
         marginBottom:14,
+    },
+    emptySpace: {
+        height:70
     },
     cardContainer: {
         paddingTop:14,

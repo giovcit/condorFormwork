@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useSelector } from 'react-redux';
+import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
+import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
 import '../globals';
 
 const win = Dimensions.get('window');
@@ -26,7 +28,10 @@ const CardList = ({navigation,route}) => {
     <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
         <ScrollView style={styles.viewStyle}>
            <Soluzioni/>
+           <View style={styles.emptySpace}/>
         </ScrollView>
+        <ConsulenzaBar/>
+        <CustomBottomToolbar/>
     </SafeAreaView>);
     
 }
@@ -62,7 +67,10 @@ const cardHeight = win.width/3;
 
 const styles = StyleSheet.create({
     viewStyle: {
-        marginBottom:14,
+        marginBottom:14
+    },
+    emptySpace: {
+        height:70
     },
     cardContainer: {
         paddingTop:14,

@@ -43,9 +43,10 @@ const CustomBottomToolbar = () => {
       IconElement={<><Image resizeMode="cover" style={styles.tbAction} source={require('../../../img/tb-soluzioni.png')}/><Text style={styles.tbText}>Soluzioni</Text></>}
       onPress={() =>
         navigation.navigate('CardList',{
-          lang:'it'
+          lang:'it',
+          case:'soluzioni'
         })
-      }
+        }
     />
     <BottomToolbar.Action
       title="AR"

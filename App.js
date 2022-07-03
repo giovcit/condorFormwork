@@ -18,6 +18,7 @@ import Prodotti from './src/screens/Prodotti'
 import TopBar from './src/components/utils/components/TopBar';
 import Hamburger from './src/components/utils/components/Hamburger';
 import Menu from './src/components/utils/components/Menu';
+import DettaglioProdotto from './src/screens/DettaglioProdotto';
 
 const Stack = createStackNavigator();
 
@@ -68,6 +69,10 @@ console.log(navigation);
           <Stack.Screen
             name="Prodotti"
             component={Prodotti}
+          />
+          <Stack.Screen
+            name="DettaglioProdotto"
+            component={DettaglioProdotto}
           />
         </Stack.Navigator>
       </NavigationContainer>

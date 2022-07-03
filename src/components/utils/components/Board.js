@@ -37,7 +37,7 @@ export const getCategorySoluzioni = async () => {
 }
 
 export const getProdottiSoluzioni = async () => {
-    const response = await fetch(PRODOTTI_SOLUZIONI_API+'?per_page=100&_fields[]=id&_fields[]=title&_fields[]=soluzioni&_fields[]=featured_media');
+    const response = await fetch(PRODOTTI_SOLUZIONI_API+'?per_page=100&_fields[]=id&_fields[]=title&_fields[]=soluzioni&_fields[]=featured_media&_fields[]=acf&_fields[]=content');
             if(!response.ok) {
                 // oups! something went wrong
                 console.log(response);
@@ -58,6 +58,23 @@ export const getProdottiSoluzioni = async () => {
                 const m = await response.json();
                 newProdotti[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
                 //console.log(JSON.stringify(newProdotti[s]))
+                
+                //var { main_gallery } = newProdotti[s].acf;
+                //var listGallery = [];
+                //for (g in main_gallery){
+                  //console.log('GALLER: '+main_gallery[g]);
+                  //const responseGallery = await fetch(MEDIA_API+'/'+main_gallery[g]+'?_fields[]=id&_fields[]=media_details');
+                  //if(!responseGallery.ok) {
+                  // oups! something went wrong
+                  //console.log(responseGallery);
+                  //return;
+                  //}
+                  //console.log('RESPONSE:'+response);
+                  //const ga = await responseGallery.json();
+                  //console.log(UPLOADS_DIR+'/'+ga.media_details.file);
+                  //listGallery.push(UPLOADS_DIR+'/'+ga.media_details.file);
+                //}
+                //newProdotti[s].galleryImage = listGallery;
             }
         
             return await newProdotti;

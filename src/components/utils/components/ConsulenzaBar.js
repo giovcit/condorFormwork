@@ -3,7 +3,9 @@ import Colors from "./Colors";
 import { Dimensions,
         StyleSheet,
         Image, 
-        Animated } from "react-native";
+        Animated,
+        View
+} from "react-native";
 import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
