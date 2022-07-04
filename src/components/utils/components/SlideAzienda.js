@@ -15,59 +15,39 @@ import SimplePaginationDot from '../components/SimplePaginationDot'
 import { useNavigation } from '@react-navigation/native';
 const data = [
     {
-      uri: require('../../../img/soluzioni-slide.png'),
-      title: 'Soluzioni',
-      component:'CardList',
+      id:'s1',
+      uri: require('../../../img/slideFacciate.png'),
     },
     {
-      uri: require('../../../img/progetti-slide.png'),
-      title: 'Progetti',
-      component:'Progetti',
+      id:'s2',
+      uri: require('../../../img/slideCasseforme.png'),
     },
     {
-      uri: require('../../../img/azienda-slide.png'),
-      title: 'Azienda',
-      component:'Azienda',
+      id:'s3',
+      uri: require('../../../img/slideProgetti.png'),
     },
     {
-      uri: require('../../../img/consulenza-slide.png'),
-      title: 'Consulenza',
-      component:'CardList',
+      id:'s4',
+      uri: require('../../../img/slidePaesi.png'),
     },
-    {
-      uri: require('../../../img/justscaff-slide.png'),
-      title: 'JustScaff',
-      component:'CardList',
-    }
+    
     
   ];  
 
   const win = Dimensions.get('window');
   const ratio = win.width / 200;
 
-  const Slide = () => {
+  const SlideAzienda = () => {
     const carouselRef = useRef(null);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const navigation = useNavigation();    
     
     const renderItem = ({item, index}) => {
-        const {uri, title, content} = item;
+        const { id,uri } = item;
         return (
           <TouchableOpacity
-            activeOpacity={0.9}
-            style={stylesCarousel.item}
-            onPress={() =>
-              navigation.navigate(item.component,{
-                lang:'it',
-              })
-              }
-            >
-            <ImageBackground source={uri} style={stylesCarousel.imageBackground}   imageStyle={{ borderRadius: 3}}
-      >
-              <View style={stylesCarousel.TextContainer}>
-                <Text style={stylesCarousel.centerText}>{item.title}</Text>
-              </View>
-            </ImageBackground>
+            activeOpacity={1}
+            style={stylesCarousel.item} key={id}>
+            <ImageBackground source={uri} style={stylesCarousel.imageBackground}   imageStyle={{ borderRadius: 3}}/>
           </TouchableOpacity>
         );
       }
@@ -84,7 +64,7 @@ const data = [
         data={data}
         renderItem={renderItem}
         style={stylesCarousel.carousel}
-        itemWidth={win.width * 0.8}
+        itemWidth={win.width * 0.7}
         containerWidth={win.width}
         separatorWidth={0}
         onScrollEnd={handleCarouselScrollEnd}
@@ -101,40 +81,29 @@ const data = [
 
 
   const stylesCarousel = StyleSheet.create({
-    container: {backgroundColor: '#141518', paddingVertical: 20},
-  
+
+    container: {
+      backgroundColor: '#141518', 
+      paddingVertical: 20,
+    },
     item: {
       backgroundColor: 'white',
       flex: 1,
       shadowColor: "#000",
     shadowOffset: {
-        width: 0,
+        width: 1,
         height: 1,
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-    elevation: 5,
-      borderRadius:200,
-      margin:10,
+    elevation: 0,
+      margin:0,
       
     },
     imageBackground: {
       flex: 2,
-      paddingTop:win.height/3,
+      paddingTop:win.height/2.3,
     },
-    TextContainer: {
-      alignItems:'center',
-      padding: 3,
-      marginTop: 3,
-      borderTopLeftRadius: 5,
-      borderBottomLeftRadius: 5,
-    },
-    centerText: {
-      color: 'white',
-      fontFamily:'SybillaPro-Bold',
-      fontSize:23,
-      marginBottom:20
-      },
     lowerContainer: {
       flex: 1,
       margin: 10,
@@ -150,4 +119,4 @@ const data = [
   });
 
   
-export default Slide;
+export default SlideAzienda;

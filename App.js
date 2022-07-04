@@ -21,6 +21,7 @@ import Menu from './src/components/utils/components/Menu';
 import DettaglioProdotto from './src/screens/DettaglioProdotto';
 import Progetti from './src/screens/Progetti';
 import DettaglioProgetto from './src/screens/DettaglioProgetto';
+import Azienda from './src/screens/Azienda';
 const Stack = createStackNavigator();
 
 const App = ({ navigation }) => {
@@ -55,6 +56,10 @@ console.log(navigation);
               )
             }
             
+          />
+          <Stack.Screen
+            name="Azienda"
+            component={Azienda}
           />
           <Stack.Screen
             name="CardList"
