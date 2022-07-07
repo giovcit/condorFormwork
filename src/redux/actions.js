@@ -14,6 +14,8 @@ export const SET_CURRENT_SCREEN = 'SET_CURRENT_SCREEN';
 export const LOAD_SOLUZIONI = 'LOAD_SOLUZIONI';
 export const LOAD_PRODOTTI = 'LOAD_PRODOTTI';
 export const LOAD_PROGETTI = 'LOAD_PROGETTI';
+export const LOAD_BLOG = 'LOAD_BLOG';
+export const SET_CURRENT_LANG = 'SET_CURRENT_LANG';
 
 
 export const setFcmToken = token => dispatch => {
@@ -45,6 +47,22 @@ export const loadProgetti = progetti => dispatch => {
   dispatch({
     type: LOAD_PROGETTI,
     payload:progetti
+  });
+}
+
+export const loadBlog = blog => dispatch => {
+  //console.log('blog in load blog: '+JSON.stringify(blog));
+  dispatch({
+    type: LOAD_BLOG,
+    payload:blog
+  });
+}
+
+export const setCurrentLang = lang => dispatch => {
+  //console.log('lang to set: '+JSON.stringify(lang));
+  dispatch({
+    type: SET_CURRENT_LANG,
+    payload:lang
   });
 }
 

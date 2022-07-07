@@ -30,35 +30,35 @@ var data = {
     featuredImage:'http://stage.appcondor.com/app/themes/condor/dist/images/hero-image/default.ponteggio_69f15.jpg',
     tab:[
         {
-        label:'La nostra offerta',
+        title:'La nostra offerta',
+        content:'<b>Lorem ipsum dolor sit amet</b> '
+    },
+    {
+        title:'Un servizio senza frontiere',
         content:'Lorem ipsum dolor sit amet'
     },
     {
-        label:'Un servizio senza frontiere',
+        title:'Un servizio senza frontiere',
         content:'Lorem ipsum dolor sit amet'
     },
     {
-        label:'Un servizio senza frontiere',
-        content:'Lorem ipsum dolor sit amet'
-    },
-    {
-        label:'Uno sguardo verso il futuro',
+        title:'Uno sguardo verso il futuro',
         content:'Lorem ipsum dolor sit amet'
     },
     {   
-        label:'Tecnologia',
+        title:'Tecnologia',
         content:'Lorem ipsum dolor sit amet'
     },
     {   
-        label:'Ricerca e sviluppo',
+        title:'Ricerca e sviluppo',
         content:'Lorem ipsum dolor sit amet'
     },
     {   
-        label:'Qualità',
+        title:'Qualità',
         content:'Lorem ipsum dolor sit amet'
     },
     {   
-        label:'Formazione e Sicurezza',
+        title:'Formazione e Sicurezza',
         content:'Lorem ipsum dolor sit amet'
     }
     ]
@@ -84,19 +84,23 @@ const Azienda = ({navigation,route}) => {
                 <Text style={styles.aziendaDettaglio}>{sottotitolo}</Text>
                 <Text style={styles.aziendaTitolo}>{titolo}</Text>
                 <Text style={styles.aziendaIntro}>{intro}</Text>
-                <View style={styles.aziendaVideo}>
-                <YoutubePlayer
-                height={win.width/2}
-                initialPlayerParams={{showClosedCaptions:true}}
-                //play={playing}
-                videoId={video}
-                onChangeState={() => {}}
-                /></View>
-                <View style={styles.aziendaSlide}>
-                <SlideAzienda/>
-                </View>
-                <InfoTab props={tab}/>
             </View>
+                <View style={styles.aziendaVideo}>
+                    <YoutubePlayer
+                    height={win.width/2}
+                    initialPlayerParams={{showClosedCaptions:true}}
+                    //play={playing}
+                    videoId={video}
+                    onChangeState={() => {}}
+                    />
+                </View>
+                <View style={styles.aziendaSlide}>
+                    <SlideAzienda/>
+                </View> 
+                <View style={styles.aziendaTab}>
+                    <InfoTab props={tab}/>
+                </View>
+            
             <View style={styles.emptySpace}/>
             </ScrollView>
             <ConsulenzaBar/>
@@ -117,7 +121,7 @@ const styles = StyleSheet.create({
     },
     aziendaSlide: {
         backgroundColor:'white',
-        marginLeft:-marginDettaglio*2,
+        marginLeft:0,
         width:win.width,
         paddingLeft:marginDettaglio,
         paddingTop:30,
@@ -129,13 +133,22 @@ const styles = StyleSheet.create({
         fontSize:12,
         color:'#B2B2B2',
     },
+    aziendaTab: {
+        marginLeft:0,
+        width:win.width,
+        //paddingLeft:marginDettaglio,
+        backgroundColor:'white',
+        paddingTop:0,
+        paddingBottom:0
+    },
     contenutoDettaglio: {
 
     },
     aziendaVideo:{
-        marginTop:30,
-        marginLeft:-marginDettaglio*2,
+        marginTop:0,
+        marginLeft:0,
         width:win.width,
+        backgroundColor:'white'
     },
     aziendaIntro:{
         marginTop:25,

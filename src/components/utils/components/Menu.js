@@ -32,7 +32,7 @@ const data = [
     },
     {
         title: 'Progetti',
-        component:'CardList',
+        component:'Progetti',
         type:'primary'
     },
     {
@@ -52,26 +52,24 @@ const data = [
     },
     {
         title: 'Realtà Aumentata',
-        component:'AR ',
+        component:'AR',
         type:'primary'
     },
     {
       title: 'Blog',
-      component:'Blog ',
+      component:'Blog',
       type:'secondary'
     },
     {
       title: 'Contatti',
-      component:'Contatti ',
+      component:'Contatti',
       type:'secondary'
     },
     {
       title: 'Selezione Lingua',
-      component:'Lang ',
+      component:'Lang',
       type:'secondary'
     },
-
-    
   ]; 
 
   
@@ -84,6 +82,19 @@ const data = [
     for (var item in data){
       let {title,component,type } = data[item];
       if (item == data.length-1) { lastSubCase = true;}
+      var itemStyle = styles.textItem;
+
+      if (type === 'secondary') {
+        if (firstSubCase){
+          itemStyle = styles.firstSubItem;
+        }else if (!firstSubCase && !lastSubCase){
+          itemStyle = styles.textSubItem;
+        }else if (!firstSubCase && lastSubCase){
+          itemStyle = styles.lastSubItem;
+        }
+      }
+    
+
       
       menu.push(<Pressable key={title}
         style={styles.menuItem}
@@ -92,13 +103,7 @@ const data = [
             lang:'it'
           })}
           }>
-            
-            { type === 'primary' ?  <Text style={styles.textItem}>{title}</Text> : <></>  }
-            { type === 'secondary' && firstSubCase ? <Text style={{...styles.textSubItem,marginTop:30}}>{title}</Text> : <></>}
-            { type === 'secondary' && !firstSubCase && !lastSubCase ? <Text style={styles.textSubItem}>{title}</Text> : <></>}
-            { type === 'secondary' && !firstSubCase && lastSubCase ? <Text style={{...styles.textSubItem,borderBottomColor:'rgba(0,0,0,0)'}}>{title}</Text> : <></>}
-            
-            
+          { <Text style={itemStyle}>{title}</Text> }
         </Pressable>
         );
         if ( type === 'secondary' && firstSubCase) firstSubCase = false;
@@ -138,6 +143,18 @@ const Menu = () => {
 }
 
 
+
+const secondaryItem = {
+  color:'white',
+  fontSize:18,
+  paddingTop:10,
+  paddingBottom:10,
+  borderBottomColor:'#740008',
+  borderBottomWidth:1,
+  width:win.width-40,
+  fontFamily:'OpenSans-Regular',
+}
+
 const styles = StyleSheet.create({
     backgroundStyle: {
       flex:1,
@@ -175,15 +192,16 @@ const styles = StyleSheet.create({
 
     },
     textSubItem:{
-      color:'white',
-      fontSize:18,
-      paddingTop:10,
-      paddingBottom:10,
-      borderBottomColor:'#740008',
-      borderBottomWidth:1,
-      width:win.width-40,
-      fontFamily:'OpenSans-Regular'
+    ...secondaryItem
+    },
+    firstSubItem:{
+      ...secondaryItem,
+      marginTop:30,
 
+    },
+    lastSubItem:{
+      ...secondaryItem,
+      borderBottomColor:'rgba(0,0,0,0)'
     }
     
     

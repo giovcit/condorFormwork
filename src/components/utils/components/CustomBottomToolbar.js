@@ -59,8 +59,11 @@ const CustomBottomToolbar = () => {
       title="JustScaff"
       
       IconElement={<><Image resizeMode="cover" style={styles.tbAction} source={require('../../../img/tb-justscaff.png')}/><Text style={styles.tbText}>JustScaff</Text></>}
-      onPress={(index, propsOfThisAction) =>
-        console.warn(index + ' ' + JSON.stringify(propsOfThisAction))}
+      onPress={() =>
+        navigation.navigate('JustScaff',{
+          lang:'it',
+        })
+        }
     />
     
     

@@ -12,7 +12,6 @@ import {
 import RenderHtml from 'react-native-render-html';
 import ConsulenzaBar from "../components/utils/components/ConsulenzaBar";
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
-import InfoTab from "../components/utils/components/InfoTab";
 
 
 
@@ -21,31 +20,13 @@ const marginDettaglio = 16;
 const paddingDettaglio = 16;
 const innnerDettaglio = win.width-(marginDettaglio*2);
 
-const DettaglioProdotto = ({navigation,route}) => {
+const DettaglioBlog = ({navigation,route}) => {
 
-    const {id,title,soluzioni,featuredImage,content} = route.params.dataProdotto;
+    const {id,title,soluzioni,featuredImage,content} = route.params.dataBlog;
     navigation.setOptions({title:title.rendered});
-
-    const intro = '<b>Questo è l\'intro html che sarà verosimilmente un grassetto di 4-5 righe.Questo è l\'intro html che sarà verosimilmente un grassetto di 4-5 righe.Questo è l\'intro html che sarà verosimilmente un grassetto di 4-5 righe.</b>';//poi content.render
-    const tab = [
-            {
-                title:'Caratteristiche',
-                content:content.rendered //poi acf dedicato
-            },
-            {
-                title:'Sistema',
-                content:content.rendered //poi acf dedicato
-            },
-            {
-                title:'Download',
-                content:content.rendered //valutare se generare html o gestire sezione con rn
-            }
-    ];
-
-
-    console.log('PARAMS: '+JSON.stringify(route.params.dataProdotto));
+    console.log('PARAMS: '+JSON.stringify(route.params.dataBlog));
     const source = {
-        html: intro
+        html: content.rendered
       };
     return (<>
         <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
@@ -56,14 +37,11 @@ const DettaglioProdotto = ({navigation,route}) => {
             <View style={styles.containerDettaglio}>
                 <Text style={styles.categoryDettaglio}>{route.params.nameSoluzione}</Text>
                 <Text style={styles.categoryTitolo}>{title.rendered}</Text>
-                <View style={styles.introDettaglio}>
-                 <RenderHtml
-                 source={source}
-                 contentWidth={innnerDettaglio}
-                 tagsStyles={stylesIntro}
-                 />
-                </View>
-                <InfoTab props={tab}/>
+                <RenderHtml
+                source={source}
+                contentWidth={innnerDettaglio}
+                style={styles.contenutoDettaglio}
+                />
             </View>
             <View style={styles.emptySpace}/>
             </ScrollView>
@@ -78,13 +56,6 @@ const DettaglioProdotto = ({navigation,route}) => {
 }
 
 
-const stylesIntro = {
-    b:{
-        color:'black'
-    }
-}
-
-
 
 const styles = StyleSheet.create({
     emptySpace: {
@@ -96,10 +67,7 @@ const styles = StyleSheet.create({
         fontSize:12,
         color:'#B2B2B2',
     },
-    introDettaglio: {
-        marginTop:10,
-        marginBottom:20,
-        color:'black',
+    contenutoDettaglio: {
 
     },
     categoryTitolo:{
@@ -131,4 +99,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default DettaglioProdotto;
+export default DettaglioBlog;

@@ -22,6 +22,9 @@ import DettaglioProdotto from './src/screens/DettaglioProdotto';
 import Progetti from './src/screens/Progetti';
 import DettaglioProgetto from './src/screens/DettaglioProgetto';
 import Azienda from './src/screens/Azienda';
+import JustScaff from './src/screens/JustScaff';
+import Blog from './src/screens/Blog';
+import DettaglioBlog from './src/screens/DettaglioBlog';
 const Stack = createStackNavigator();
 
 const App = ({ navigation }) => {
@@ -62,6 +65,10 @@ console.log(navigation);
             component={Azienda}
           />
           <Stack.Screen
+            name="JustScaff"
+            component={JustScaff}
+          />
+          <Stack.Screen
             name="CardList"
             component={CardList}
             options={
@@ -87,6 +94,14 @@ console.log(navigation);
           <Stack.Screen
             name="DettaglioProgetto"
             component={DettaglioProgetto}
+          />
+          <Stack.Screen
+            name="Blog"
+            component={Blog}
+          />
+          <Stack.Screen 
+            name="DettaglioBlog"
+            component={DettaglioBlog}
           />
         </Stack.Navigator>
       </NavigationContainer>

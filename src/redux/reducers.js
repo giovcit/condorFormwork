@@ -7,7 +7,9 @@ import {
     SET_CURRENT_SCREEN,
     LOAD_SOLUZIONI,
     LOAD_PRODOTTI,
-    LOAD_PROGETTI
+    LOAD_PROGETTI,
+    LOAD_BLOG,
+    SET_CURRENT_LANG
 } from './actions';
 // import {
 //     AUTH_ROLE_USER,
@@ -23,6 +25,8 @@ const initialState = {
     soluzioni:[],
     prodotti:[],
     progetti:[],
+    blog:[],
+    currentLang:''
 };
 
 function CoReducer(state = initialState, action) {
@@ -49,6 +53,18 @@ function CoReducer(state = initialState, action) {
       return {
         ...state,
         progetti:action.payload,
+      }
+    case LOAD_BLOG:
+      //console.log('PAYLOAD: '+JSON.stringify(action.payload));
+      return {
+        ...state,
+        blog:action.payload,
+      }
+    case SET_CURRENT_LANG:
+      console.log('FROM '+state.currentLang+' TO '+JSON.stringify(action.payload));
+      return {
+        ...state,
+      currentLang:action.payload,
       }
     default:
       return state;

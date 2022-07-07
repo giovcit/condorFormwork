@@ -32,12 +32,12 @@ const data = [
     {
       uri: require('../../../img/consulenza-slide.png'),
       title: 'Consulenza',
-      component:'CardList',
+      component:'Blog',
     },
     {
       uri: require('../../../img/justscaff-slide.png'),
       title: 'JustScaff',
-      component:'CardList',
+      component:'JustScaff',
     }
     
   ];  

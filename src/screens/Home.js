@@ -26,13 +26,15 @@ import {
   setCurrentScreen,
   loadSoluzioni,
   loadProdotti,
-  loadProgetti
+  loadProgetti,
+  loadBlog,
+  setCurrentLang
  } from '../redux/actions';
 import '../globals';
 import { useDispatch, useSelector } from 'react-redux';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import Slide from '../components/utils/components/Slide';
-import { getCategorySoluzioni,getProdottiSoluzioni, getProgetti } from '../components/utils/components/Board';
+import { getBlog, getCategorySoluzioni,getProdottiSoluzioni, getProgetti } from '../components/utils/components/Board';
 
 const win = Dimensions.get('window');
 const ratio = win.width / 200;
@@ -43,7 +45,7 @@ const Home = ({navigation,route}) => {
     const { lang } = route.params;
     
     const dispatch = useDispatch();
-    const { soluzioni,prodotti,progetti } =  useSelector(state => state.CoReducer);
+    const { soluzioni,prodotti,progetti,blog,currentLang } =  useSelector(state => state.CoReducer);
 
 
     
@@ -51,10 +53,12 @@ const Home = ({navigation,route}) => {
   //VIA WORDPRESS API
   useEffect(() => {
     (async () => {
-      if (soluzioni.length < 1 ) dispatch(loadSoluzioni(await getCategorySoluzioni()));
-      if (prodotti.length < 1 ) dispatch(loadProdotti(await getProdottiSoluzioni()));
-      if (prodotti.length < 1) dispatch(loadProgetti(await getProgetti()));
-  
+        if (currentLang !== lang || soluzioni.length < 1 ) dispatch(loadSoluzioni(await getCategorySoluzioni(lang)));
+        if (currentLang !== lang || prodotti.length < 1 ) dispatch(loadProdotti(await getProdottiSoluzioni(lang)));
+        if (currentLang !== lang || progetti.length < 1) dispatch(loadProgetti(await getProgetti(lang)));
+        if (currentLang !== lang || blog.length < 1) dispatch(loadBlog(await getBlog(lang)));
+        dispatch(setCurrentLang(lang));
+      
     })();
   },[])
   
