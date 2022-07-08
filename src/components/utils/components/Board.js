@@ -1,4 +1,5 @@
 import { decode } from 'html-entities';
+import moment from 'moment-timezone';
 import '../../../globals';
 
 const baseUrlOnLang = {
@@ -24,7 +25,7 @@ export const getCategorySoluzioni = async (lang) => {
             //console.log('SOL: '+JSON.stringify(soluzioni));
 
             for (var s in newSoluzioni){
-                const response = await fetch(currentUrl+MEDIA_API+'/'+newSoluzioni[s].acf.main_image+'?_fields[]=id&_fields[]=media_details');
+                const response = await fetch(currentUrl+MEDIA_API+'/'+newSoluzioni[s].acf.main_image+'?_fields[]=id&_fields[]=source_url');
                 if(!response.ok) {
                   // oups! something went wrong
                   console.log(response);
@@ -32,7 +33,7 @@ export const getCategorySoluzioni = async (lang) => {
                 }
                 //console.log('RESPONSE:'+response);
                 const m = await response.json();
-                newSoluzioni[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
+                newSoluzioni[s].featuredImage = currentUrl+'/'+m.source_url;
                 //console.log(JSON.stringify(newSoluzioni[s]))
                 const responseIcon = await fetch(currentUrl+MEDIA_API+'/'+newSoluzioni[s].acf.main_solution_icon+'?_fields[]=id&_fields[]=media_details');
                 if(!responseIcon.ok) {
@@ -52,7 +53,7 @@ export const getCategorySoluzioni = async (lang) => {
 export const getBlog = async (lang) => {
   var currentUrl = baseUrlOnLang[lang];
 
-  const response = await fetch(currentUrl+BLOG_API+'&per_page=20&_fields[]=id&_fields[]=title&_fields[]=featured_media&_fields[]=content');
+  const response = await fetch(currentUrl+BLOG_API+'&per_page=20&_fields[]=id&_fields[]=title&_fields[]=featured_media&_fields[]=content&_fields[]=excerpt&_fields[]=date');
           if(!response.ok) {
               // oups! something went wrong
               console.log(response);
@@ -63,7 +64,7 @@ export const getBlog = async (lang) => {
           //console.log('SOL: '+JSON.stringify(newBlog));
 
           for (var s in newBlog){
-              const response = await fetch(currentUrl+MEDIA_API+'/'+newBlog[s].featured_media+'?_fields[]=id&_fields[]=media_details');
+              const response = await fetch(currentUrl+MEDIA_API+'/'+newBlog[s].featured_media+'?_fields[]=id&_fields[]=source_url');
               if(!response.ok) {
                 // oups! something went wrong
                 console.log(response);
@@ -71,8 +72,10 @@ export const getBlog = async (lang) => {
               }
               //console.log('RESPONSE:'+response);
               const b = await response.json();
-              newBlog[s].featuredImage = UPLOADS_DIR+'/'+b.media_details.file;
+              newBlog[s].featuredImage = currentUrl+'/'+b.source_url;
               newBlog[s].title.rendered = decode(newBlog[s].title.rendered);
+              let newDate = moment(newBlog[s].date).utcOffset(newBlog[s].date);
+              newBlog[s].date = newDate.format('DD/MM/YYYY');
           }
           console.log('BLOG LOADED !!!');
           return await newBlog;
@@ -91,7 +94,7 @@ export const getProgetti = async (lang) => {
           //console.log('SOL: '+JSON.stringify(progetti));
 
           for (var s in newProgetti){
-              const response = await fetch(currentUrl+MEDIA_API+'/'+newProgetti[s].featured_media+'?_fields[]=id&_fields[]=media_details');
+              const response = await fetch(currentUrl+MEDIA_API+'/'+newProgetti[s].featured_media+'?_fields[]=id&_fields[]=source_url');
               if(!response.ok) {
                 // oups! something went wrong
                 console.log(response);
@@ -99,7 +102,7 @@ export const getProgetti = async (lang) => {
               }
               //console.log('RESPONSE:'+response);
               const m = await response.json();
-              newProgetti[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
+              newProgetti[s].featuredImage = currentUrl+'/'+m.source_url;
               newProgetti[s].title.rendered = decode(newProgetti[s].title.rendered);
           }
           console.log('PROGETTI LOADED !!!');
@@ -120,7 +123,7 @@ export const getProdottiSoluzioni = async (lang) => {
             //console.log('SOL: '+JSON.stringify(prodotti));
 
             for (var s in newProdotti){
-                const response = await fetch(currentUrl+MEDIA_API+'/'+newProdotti[s].featured_media+'?_fields[]=id&_fields[]=media_details');
+                const response = await fetch(currentUrl+MEDIA_API+'/'+newProdotti[s].featured_media+'?_fields[]=id&_fields[]=source_url');
                 if(!response.ok) {
                   // oups! something went wrong
                   console.log(response);
@@ -128,7 +131,7 @@ export const getProdottiSoluzioni = async (lang) => {
                 }
                 //console.log('RESPONSE:'+response);
                 const m = await response.json();
-                newProdotti[s].featuredImage = UPLOADS_DIR+'/'+m.media_details.file;
+                newProdotti[s].featuredImage = currentUrl+'/'+m.source_url;
                 //console.log(JSON.stringify(newProdotti[s]))
                 
                 //var { main_gallery } = newProdotti[s].acf;

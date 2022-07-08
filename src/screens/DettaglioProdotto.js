@@ -80,7 +80,9 @@ const DettaglioProdotto = ({navigation,route}) => {
 
 const stylesIntro = {
     b:{
-        color:'black'
+        color:'black',
+        fontSize:15,
+        lineHeight:19
     }
 }
 
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     },
     introDettaglio: {
         marginTop:10,
-        marginBottom:20,
+        marginBottom:23,
         color:'black',
 
     },

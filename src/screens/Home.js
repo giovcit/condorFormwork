@@ -53,6 +53,7 @@ const Home = ({navigation,route}) => {
   //VIA WORDPRESS API
   useEffect(() => {
     (async () => {
+        console.log('START LOADING OR GET TO CACHE')
         if (currentLang !== lang || soluzioni.length < 1 ) dispatch(loadSoluzioni(await getCategorySoluzioni(lang)));
         if (currentLang !== lang || prodotti.length < 1 ) dispatch(loadProdotti(await getProdottiSoluzioni(lang)));
         if (currentLang !== lang || progetti.length < 1) dispatch(loadProgetti(await getProgetti(lang)));

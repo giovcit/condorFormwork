@@ -24,8 +24,21 @@ const innnerDettaglio = win.width-(marginDettaglio*2);
 
 
 const stylesHtml = {
-    b:{
-        color:'red'
+    p:{
+        color:'black',
+        fontFamily:'OpenSans-Medium',
+        fontSize:15,
+        //lineHeight:18,
+    },
+    h6: {
+      fontSize:15,
+      color:'black',
+      margin:0
+    },
+    h4: {
+      fontSize:15,
+      color:'black',
+      margin:0
     }
 }
 
@@ -55,7 +68,7 @@ const InfoTab = ({props}) => {
             duration={400}
             style={[styles.header, isActive ? styles.active : styles.inactive]}
             transition="backgroundColor">
-            <Text style={styles.headerText}>{section.title}</Text>
+            <Text style={[styles.headerText,isActive ? styles.activeTitle :styles.inactiveTitle]}>{section.title}</Text>
           </Animatable.View>
         );
       };
@@ -131,7 +144,7 @@ const styles = StyleSheet.create({
         color:'black'
     },
     title: {
-      fontSize: 18,
+      fontSize: 30,
       fontWeight: '300',
       marginBottom: 20,
       color:'gray',
@@ -147,13 +160,18 @@ const styles = StyleSheet.create({
     },
     headerText: {
       textAlign: 'left',
-      fontSize: 16,
+      fontSize: 22,
       fontWeight: '500',
+      color:'#B2B2B2',
+      fontFamily:'SybillaPro-Bold'
       
     },
     content: {
       paddingTop: 20,
       paddingBottom:10
+    },
+    activeTitle:{
+      color:'black'
     },
     active: {
       backgroundColor: Colors.backgroundPrimary,
