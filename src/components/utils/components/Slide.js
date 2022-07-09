@@ -32,7 +32,7 @@ const data = [
     {
       uri: require('../../../img/consulenza-slide.png'),
       title: 'Consulenza',
-      component:'Blog',
+      component:'Consulenza',
     },
     {
       uri: require('../../../img/justscaff-slide.png'),
