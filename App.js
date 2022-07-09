@@ -26,6 +26,7 @@ import JustScaff from './src/screens/JustScaff';
 import Blog from './src/screens/Blog';
 import DettaglioBlog from './src/screens/DettaglioBlog';
 import Consulenza from './src/screens/Consulenza';
+import Contatti from './src/screens/Contatti';
 
 const Stack = createStackNavigator();
 
@@ -108,6 +109,10 @@ console.log(navigation);
           <Stack.Screen 
             name="DettaglioBlog"
             component={DettaglioBlog}
+          />
+          <Stack.Screen
+            name="Contatti"
+            component={Contatti}
           />
         </Stack.Navigator>
       </NavigationContainer>
