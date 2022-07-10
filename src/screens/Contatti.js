@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";   
 import ConsulenzaBar from "../components/utils/components/ConsulenzaBar";
+import Fonts from "../components/utils/components/Fonts";
 
 
 const win = Dimensions.get('window');
@@ -122,15 +123,15 @@ const Sedi = ({posizioni}) => {
             <Text style={styles.indirizzoSedi}>{posizioni[p].testo}</Text>
             {posizioni[p].tel.label != '' ? <Pressable 
                 onPress={() => Linking.openURL(`tel:${posizioni[p].tel.item}`)}>
-                <Text style={styles.telefonoSedi}>{posizioni[p].tel.label} {posizioni[p].tel.item}</Text>
+                <Text style={styles.telefonoSedi}>{posizioni[p].tel.label} <Text style={styles.boldMe}>{posizioni[p].tel.item}</Text></Text>
             </Pressable>: <></>}
             {posizioni[p].email.label != '' ? <Pressable 
                 onPress={() => Linking.openURL(`mailto:${posizioni[p].email.item}`)}>
-                <Text style={styles.emailSedi}>{posizioni[p].email.label} {posizioni[p].email.item}</Text>
+                <Text style={styles.emailSedi}>{posizioni[p].email.label} <Text style={styles.boldMe}>{posizioni[p].email.item}</Text></Text>
             </Pressable> : <></>}
             {posizioni[p].emailPec.label != '' ? <Pressable 
                 onPress={() => Linking.openURL(`mailto:${posizioni[p].emailPec.item}`)}>
-                <Text style={styles.emailSedi}>{posizioni[p].emailPec.label} {posizioni[p].emailPec.item}</Text>
+                <Text style={styles.emailSedi}>{posizioni[p].emailPec.label} <Text style={styles.boldMe}>{posizioni[p].emailPec.item}</Text></Text>
             </Pressable> : <></>}
         </View>);
     }
@@ -176,6 +177,9 @@ const styles = StyleSheet.create({
     consulenzaForm:{
 
     },
+    boldMe: {
+        fontWeight:'bold'
+    },
     consulenzaDettaglio: {
         fontFamily:'OpenSans-MediumItalic',
         fontStyle:'italic',
@@ -197,9 +201,27 @@ const styles = StyleSheet.create({
     },
     consulenzaTitolo:{
         color:'black',
-        fontSize:26,
+        fontSize:Fonts.titleFont,
         fontFamily:'SybillaPro-Bold',
         textTransform:'capitalize'
+    },
+    titoloSedi:{
+        color:'black',
+        fontWeight:'bold',
+        fontSize:Fonts.titleFont-6
+    },
+    indirizzoSedi:{
+        color:'black',
+        fontSize:Fonts.titleFont-9,
+        marginBottom:15
+    },
+    telefonoSedi:{
+        color:'black',
+        fontSize:Fonts.titleFont-9,
+    },
+    emailSedi:{
+        color:'black',
+        fontSize:Fonts.titleFont-9,
     },
     containerDettaglio:{
         backgroundColor:'white',

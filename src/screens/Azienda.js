@@ -14,6 +14,7 @@ import CustomBottomToolbar from "../components/utils/components/CustomBottomTool
 import YoutubePlayer from 'react-native-youtube-iframe';
 import InfoTab from '../components/utils/components/InfoTab';
 import SlideAzienda from "../components/utils/components/SlideAzienda";
+import Fonts from "../components/utils/components/Fonts";
 
 
 const win = Dimensions.get('window');
@@ -134,10 +135,10 @@ const styles = StyleSheet.create({
         color:'#B2B2B2',
     },
     aziendaTab: {
-        marginLeft:0,
-        width:win.width,
+        alignSelf:'center',
+        width:innnerDettaglio,
+        padding:10,
         //paddingLeft:marginDettaglio,
-        backgroundColor:'white',
         paddingTop:0,
         paddingBottom:0
     },
@@ -151,14 +152,15 @@ const styles = StyleSheet.create({
         backgroundColor:'white'
     },
     aziendaIntro:{
-        marginTop:25,
+        marginTop:15,
         fontWeight:'bold',
         color:'black',
-        fontFamily:'OpenSans-Bold'
+        fontFamily:'OpenSans-Bold',
+        fontSize:Fonts.introFont
     },
     aziendaTitolo:{
         color:'black',
-        fontSize:26,
+        fontSize:Fonts.titleFont,
         fontFamily:'SybillaPro-Bold',
         textTransform:'capitalize'
     },

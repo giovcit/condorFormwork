@@ -16,31 +16,13 @@ import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
 import Colors from "./Colors";
 import RenderHtml from "react-native-render-html";
+import HtmlStyles from "./HtmlStyles";
 
 const win = Dimensions.get('window');
 const marginDettaglio = 16;
 const paddingDettaglio = 16;
 const innnerDettaglio = win.width-(marginDettaglio*2);
 
-
-const stylesHtml = {
-    p:{
-        color:'black',
-        fontFamily:'OpenSans-Medium',
-        fontSize:15,
-        //lineHeight:18,
-    },
-    h6: {
-      fontSize:15,
-      color:'black',
-      margin:0
-    },
-    h4: {
-      fontSize:15,
-      color:'black',
-      margin:0
-    }
-}
 
 const InfoTab = ({props}) => {
     const [activeSections, setActiveSections] = useState([]);
@@ -86,7 +68,7 @@ const InfoTab = ({props}) => {
               <RenderHtml
               source={{html:section.content}}
               contentWidth={innnerDettaglio}
-              tagsStyles={stylesHtml}
+              tagsStyles={HtmlStyles}
               />
             </Animatable.View>
           </Animatable.View>
@@ -134,6 +116,12 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       paddingTop: 0,
+      width:win.width-20,
+      marginLeft:-20,
+      backgroundColor:Colors.backgroundPrimary,
+      paddingTop:20,
+      paddingBottom:20
+
     },
     tabScrollView: {
         paddingLeft:paddingDettaglio*2,
@@ -160,7 +148,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
       textAlign: 'left',
-      fontSize: 22,
+      fontSize: 19,
       fontWeight: '500',
       color:'#B2B2B2',
       fontFamily:'SybillaPro-Bold'

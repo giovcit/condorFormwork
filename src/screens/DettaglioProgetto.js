@@ -12,7 +12,7 @@ import {
 import RenderHtml from 'react-native-render-html';
 import ConsulenzaBar from "../components/utils/components/ConsulenzaBar";
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
-
+import HtmlStyles from "../components/utils/components/HtmlStyles";
 
 
 const win = Dimensions.get('window');
@@ -40,7 +40,7 @@ const DettaglioProgetto = ({navigation,route}) => {
                 <RenderHtml
                 source={source}
                 contentWidth={innnerDettaglio}
-                style={styles.contenutoDettaglio}
+                tagsStyles={HtmlStyles} 
                 />
             </View>
             <View style={styles.emptySpace}/>

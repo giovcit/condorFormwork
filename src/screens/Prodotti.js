@@ -15,6 +15,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { useSelector } from 'react-redux';
 import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
 import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
+import Fonts from '../components/utils/components/Fonts';
 import '../globals';
 
 const win = Dimensions.get('window');
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
       leftTextProdotti:{
         color: 'white',
         fontFamily:'SybillaPro-Bold',
-        fontSize:18,
+        fontSize:Fonts.titleCardList,
         marginBottom:14,
         width:((innerSpaceCard)/5)*4,
         textAlign:'left',

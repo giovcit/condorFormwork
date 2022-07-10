@@ -15,6 +15,7 @@ import Colors from "./Colors";
 import { useNavigation } from "@react-navigation/native";
 import { ScrollView } from "react-native-gesture-handler";
 import SocialBar from "./SocialBar";
+import Fonts from "./Fonts";
 
 
 const win = Dimensions.get('window');
@@ -151,7 +152,7 @@ const secondaryItem = {
   paddingBottom:10,
   borderBottomColor:'#740008',
   borderBottomWidth:1,
-  width:win.width-40,
+  width:win.width-60,
   fontFamily:'OpenSans-Regular',
 }
 
@@ -159,12 +160,14 @@ const styles = StyleSheet.create({
     backgroundStyle: {
       flex:1,
       backgroundColor:Colors.redCondor,
-      paddingTop:10
+      paddingTop:10,
+      paddingLeft:10,
+      paddingRight:10,
     },
     fakeBar:{
       flexDirection:'row',
       justifyContent:'space-between',
-      width:win.width
+      width:win.width-10
     },
     container: {
       flex:1,
@@ -174,9 +177,9 @@ const styles = StyleSheet.create({
         paddingRight:20,
     },
     logoWhite:{
-        width:win.width/2,
+        width:win.width/2.2,
         marginLeft:win.width/4,
-        
+        padding:10
     },
     closeWhite:{
       width:22,
@@ -187,7 +190,7 @@ const styles = StyleSheet.create({
     textItem:{
       color:'white',
       fontFamily:'SybillaPro-Bold',
-      fontSize:30,
+      fontSize:Fonts.titleFont+5,
       marginTop:12,
 
     },

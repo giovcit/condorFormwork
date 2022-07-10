@@ -79,7 +79,7 @@ const stylesHtml = {
     fontSize:18,
     fontFamily:'OpenSans-MediumItalic',
     fontStyle:'italic',
-    margin:0
+    margin:0,
     },
     a: {
         color:'transparent',
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         color:'#B2B2B2',
         fontSize:18,
         fontFamily:'OpenSans-MediumItalic',
-        fontStyle:'italic'
+        fontStyle:'italic',
     },
     moreBlog: {
         color:'black',
@@ -126,11 +126,13 @@ const styles = StyleSheet.create({
     },
     TextContainer: {
         marginLeft:14,
-        width:innerSpaceCard,
+        width:innerSpaceCard-14,
         borderBottomColor:'#B2B2B2',
         borderBottomWidth:1,
         marginTop:20,
         marginBottom:16,//+14 = 30
+        paddingLeft:7,
+        paddingRight:7
       },
       dateBlog: {
         color:'#B2B2B2',
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily:'SybillaPro-Bold',
         fontSize:22,
-        width:innerSpaceCard,
+        width:innerSpaceCard-14,
         textAlign:'left'
         },
         imageBackground: {

@@ -14,6 +14,7 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useSelector } from 'react-redux';
 import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
 import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
+import Fonts from '../components/utils/components/Fonts';
 import '../globals';
 
 const win = Dimensions.get('window');
@@ -44,7 +45,6 @@ const Soluzioni = () => {
         <Pressable 
         onPress={() =>
             navigation.navigate('Prodotti',{
-              lang:'it',
               case:'prodotti',
               idProd:post.id,
               nameProd:post.name
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
       leftText: {
         color: 'white',
         fontFamily:'SybillaPro-Bold',
-        fontSize:18,
+        fontSize:Fonts.titleCardList,
         marginBottom:14,
         width:((innerSpaceCard)/5)*4,
         textAlign:'left'

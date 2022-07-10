@@ -12,6 +12,8 @@ import {
 import RenderHtml from 'react-native-render-html';
 import ConsulenzaBar from "../components/utils/components/ConsulenzaBar";
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
+import Fonts from "../components/utils/components/Fonts";
+import HtmlStyles from "../components/utils/components/HtmlStyles";
 
 
 
@@ -41,7 +43,7 @@ const DettaglioBlog = ({navigation,route}) => {
                 source={source}
                 contentWidth={innnerDettaglio}
                 style={styles.contenutoDettaglio}
-                tagsStyles={innerHtmlStyle}
+                tagsStyles={HtmlStyles}
                 />
             </View>
             <View style={styles.emptySpace}/>
@@ -57,20 +59,7 @@ const DettaglioBlog = ({navigation,route}) => {
 }
 
 
-const innerHtmlStyle = {
-    p: {
-        fontFamily:'OpenSans-Medium',
-        fontSize:18,
-        color:'black'
-    },
-    span :{
-        fontSize:18,
-        fontFamily:'OpenSans-Medium',
-        fontWeight:'bold',
-        color:'black'
-    }
-    
-}
+
 
 
 
@@ -89,7 +78,7 @@ const styles = StyleSheet.create({
     },
     categoryTitolo:{
         color:'black',
-        fontSize:26,
+        fontSize:Fonts.titleFont,
         fontFamily:'SybillaPro-Bold',
         textTransform:'capitalize'
     },

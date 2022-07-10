@@ -15,6 +15,7 @@ import { Picker } from "@react-native-picker/picker";
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
 import CheckBox from "@react-native-community/checkbox";
 import { Colors } from "../components/utils";
+import Fonts from "../components/utils/components/Fonts";
 
 
 const win = Dimensions.get('window');
@@ -303,14 +304,15 @@ const styles = StyleSheet.create({
 
     },
     consulenzaIntro:{
-        marginTop:25,
+        marginTop:15,
         fontWeight:'bold',
         color:'black',
-        fontFamily:'OpenSans-Bold'
+        fontFamily:'OpenSans-Bold',
+        fontSize:Fonts.introFont
     },
     consulenzaTitolo:{
         color:'black',
-        fontSize:26,
+        fontSize:Fonts.titleFont,
         fontFamily:'SybillaPro-Bold',
         textTransform:'capitalize'
     },

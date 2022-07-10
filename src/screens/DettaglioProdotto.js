@@ -13,6 +13,7 @@ import RenderHtml from 'react-native-render-html';
 import ConsulenzaBar from "../components/utils/components/ConsulenzaBar";
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
 import InfoTab from "../components/utils/components/InfoTab";
+import Fonts from "../components/utils/components/Fonts";
 
 
 
@@ -81,8 +82,9 @@ const DettaglioProdotto = ({navigation,route}) => {
 const stylesIntro = {
     b:{
         color:'black',
-        fontSize:15,
-        lineHeight:19
+        fontSize:Fonts.introFont,
+        lineHeight:19,
+        fontFamily:'OpenSans-Medium'
     }
 }
 

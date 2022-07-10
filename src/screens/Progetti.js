@@ -14,6 +14,7 @@ import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import { useSelector } from 'react-redux';
 import ConsulenzaBar from '../components/utils/components/ConsulenzaBar';
 import CustomBottomToolbar from '../components/utils/components/CustomBottomToolbar';
+import Fonts from '../components/utils/components/Fonts';
 import '../globals';
 
 const win = Dimensions.get('window');
@@ -53,7 +54,6 @@ const Dettaglio = () => {
         <ImageBackground resizeMode='cover' source={{uri:post.featuredImage}} style={styles.imageBackground}   imageStyle={{ borderRadius: 3}}>
         <View style={styles.TextContainer}>
             <Text style={styles.leftText}>{post.title.rendered}</Text>
-            <Image resizeMode='cover' source={{uri:post.iconImage}}style={styles.piantaImage}/>
          </View>
          </ImageBackground>
     </Pressable>))}</>
@@ -72,13 +72,9 @@ const styles = StyleSheet.create({
         height:70
     },
     cardContainer: {
-        paddingTop:14,
+        paddingTop:20,
         paddingLeft:14,
         paddingRight:14
-    },
-    piantaImage: {
-        width:(innerSpaceCard)/5,
-        height:cardHeight-cardHeight/3,
     },
     TextContainer: {
         alignItems:'baseline',
@@ -92,9 +88,9 @@ const styles = StyleSheet.create({
       leftText: {
         color: 'white',
         fontFamily:'SybillaPro-Bold',
-        fontSize:18,
+        fontSize:Fonts.titleCardList,
         marginBottom:14,
-        width:((innerSpaceCard)/5)*4,
+        width:innerSpaceCard,
         textAlign:'left'
         },
         imageBackground: {

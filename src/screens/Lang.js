@@ -6,7 +6,7 @@ import { Button,
          Image,
          View,
          SafeAreaView,
-         StatusBar,
+         Animated,
          Pressable
         } from 'react-native';
 import { setCurrentScreen } from '../redux/actions';
@@ -36,18 +36,38 @@ const lang = {
   }
 }
 
+const animated = new Animated.Value(0.55);
+
+
+const fadeIn = () => {
+  Animated.timing(animated, {
+    toValue: 0.1,
+    duration: 100,
+    useNativeDriver: true,
+  }).start();
+};
+const fadeOut = () => {
+  Animated.timing(animated, {
+    toValue: 1,
+    duration: 200,
+    useNativeDriver: true,
+  }).start();
+};
+
+
 const createLang = (navigate) => {
   let menuLang = [];
   for (var l in lang){
     let {title,imageSource,reference} = lang[l];
     menuLang.push(<Pressable key={l}
       style={styles.changeLang}
+      onPressIn={fadeIn} 
+      onPressOut={fadeOut}
       onPress={() =>
         navigate('Home',{
           lang:reference
-        })
-        }
-      onPressIn={() => {}}>
+        })  
+        }>
         <Image style={{width:70,resizeMode:'contain'}} source={imageSource}></Image>
         <Text style={styles.textLang}>{title}</Text>
       </Pressable>);
