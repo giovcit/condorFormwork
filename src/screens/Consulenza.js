@@ -11,12 +11,11 @@ import {
     TextInput,
     Linking
 } from 'react-native';
-import { Picker } from "@react-native-picker/picker";
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
 import CheckBox from "@react-native-community/checkbox";
 import { Colors } from "../components/utils";
 import Fonts from "../components/utils/components/Fonts";
-
+import { Picker } from "@react-native-picker/picker";
 
 const win = Dimensions.get('window');
 const marginDettaglio = 16;
@@ -110,45 +109,57 @@ const Consulenza = ({navigation,route}) => {
         let formSection = [];
         for (var c in campi){
             var { title,type } = campi[c]
-            if (type === 'TextInput')   formSection.push(renderInput(campi[c]));
-            if (type === 'TextArea')    formSection.push(renderTextArea(campi[c]))
-            if (type === 'SelectInput') formSection.push(renderPicker(campi[c]))
+            if (type === 'TextInput')   formSection.push(renderInput(campi[c],c));
+            if (type === 'TextArea')    formSection.push(renderTextArea(campi[c],c))
+            if (type === 'SelectInput') formSection.push(renderPicker(campi[c],c))
         }
     
         return formSection;
     }
-    const renderInput = (input) => {
+    const renderInput = (input,id) => {
         return (
-            <TextInput style={styles.inputStyle} placeholder={input.title}/>
+            <TextInput 
+            key={id} 
+            style={styles.inputStyle} 
+            placeholder={input.title}
+            placeholderTextColor="#000"/>
         );
     }
     
-    const renderTextArea = (area) => {
+    const renderTextArea = (area,id) => {
         return (
         <TextInput
+            key={id}
             multiline
             numberOfLines={10}
             style={styles.textAreaStyles}
+            containerStyle={styles.textAreaStyles}
             //onChangeText={onChangeNumber}
             //value={number}
-            placeholder={area.title}/>
+            placeholder={area.title}
+            placeholderTextColor="#000"/>
        );
     }
+
     
     
-    const renderPicker = (select) => {
+    const renderPicker = (select,id) => {
+
+                
         return(
             <View style={styles.pickerContainer}>
-                        <Picker
-                            selectedValue={currency}
-                            onValueChange={currentCurrency => setCurrency(currentCurrency)}
-                            style={{padding:0,color:'black',fontSize:10,fontWeight:'400',marginLeft:-10}}>
-                            {select.choices.map((post,index) => (
-                                <Picker.Item label={post} value={post} />
-                            ))}
-                            
-                        </Picker>
-                        </View>
+            <Picker
+                selectedValue={currency}
+                onValueChange={currentCurrency => setCurrency(currentCurrency)}
+                style={{padding:0,color:'black',fontSize:10,fontWeight:'400',marginLeft:-10}}
+                mode="dialog"
+                fontFamily={"SybillaPro-Bold"}>
+                {select.choices.map((post,index) => (
+                    <Picker.Item label={post} value={post} />
+                ))}
+                
+            </Picker>
+            </View>
         );
     }
 
@@ -171,7 +182,6 @@ const Consulenza = ({navigation,route}) => {
         checkTitle,sendTitle,orariAssistenza,telefonoAssistenza,disclaimerAssistenza
     } = data;
     const [currency, setCurrency] = useState('Seleziona');
-    console.log('PARAMS: '+JSON.stringify(route.params.dataProdotto));
     return (<>
         <SafeAreaView style={{flex:1,backgroundColor:'transparent'}}>
             <ScrollView style={styles.viewStyle}>
@@ -224,6 +234,14 @@ const styles = StyleSheet.create({
         marginTop:30,
         marginBottom:20
     },
+    pickerStyle:{
+        padding:0,
+        color:'black',
+        fontSize:10,
+        marginLeft:-10,
+        fontFamily:'SybillaPro-Bold',
+        border:0,
+    },
     buttonSendAssistenza:{
         backgroundColor:Colors.redCondor,
         width:innnerDettaglio-marginDettaglio-marginDettaglio,
@@ -275,6 +293,8 @@ const styles = StyleSheet.create({
         color:'black',
         textAlignVertical:'top',
         marginTop:10,
+        fontSize:16,
+        fontFamily:'SybillaPro-Bold'
     },
     pickerContainer:{
         borderBottomWidth:1,
@@ -284,7 +304,9 @@ const styles = StyleSheet.create({
         borderBottomColor:'#B2B2B2',
         borderBottomWidth:1,
         paddingBottom:10,
-        color:'black'
+        color:'black',
+        fontSize:16,
+        fontFamily:'SybillaPro-Bold'
     },
     consulenzaSlide: {
         backgroundColor:'white',
