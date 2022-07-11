@@ -9,13 +9,15 @@ import {
     Image,
     View,
     TextInput,
-    Linking
+    Linking,
+    Alert
 } from 'react-native';
 import CustomBottomToolbar from "../components/utils/components/CustomBottomToolbar";
 import CheckBox from "@react-native-community/checkbox";
 import { Colors } from "../components/utils";
 import Fonts from "../components/utils/components/Fonts";
-import { Picker } from "@react-native-picker/picker";
+import SelectPicker from "react-native-form-select-picker";
+import qs from "qs";
 
 const win = Dimensions.get('window');
 const marginDettaglio = 16;
@@ -28,64 +30,97 @@ var data = {
     titolo:'Chiedi ad un nostro consulente',
     intro:'Un contatto diretto con i nostri esperti e ti aiuterà ad indentificare la migliore soluzione alla tua esigenza',
     featuredImage:'http://stage.appcondor.com/app/uploads/2022/07/consulenzaHeader.jpg',
+    introEmail:'Richiesta inviata da Form App:',
+    to:'gianni.citro@gmail.com',
+    cc:'skyedilagro@gmail.com',
     form:[
     {
         title:'Tipo di richiesta',
         type:'SelectInput',
-        choices:['Preventivo','Informazioni']
+        id:30,
+        choices:['Preventivo','Informazioni'],
+        value:'',
+        mandatory:true
     },
     {
         title:'Prodotti',
         type:'SelectInput',
-        choices:['Comax','Optimo']
+        id:40,
+        choices:['Comax','Optimo'],
+        value:'',
+        mandatory:true
     },
     {
         title:'Nome',
         type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Cognome',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Azienda/Professione',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Partita Iva',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Indirizzo',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Numero Civico',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Cap',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Provincia',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Nazione',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Telefono',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Email',
-        type:'TextInput'
+        type:'TextInput',
+        value:'',
+        mandatory:true
     },
     {
         title:'Descrizione',
-        type:'TextArea'
+        type:'TextArea',
+        value:'',
+        mandatory:true
     },
     
     ],
@@ -121,7 +156,8 @@ const Consulenza = ({navigation,route}) => {
             <TextInput 
             key={id} 
             style={styles.inputStyle} 
-            placeholder={input.title}
+            placeholder={input.title+(input.mandatory ?'*':'')}
+            onChangeText={(val) => input.value=val}
             placeholderTextColor="#000"/>
         );
     }
@@ -136,19 +172,39 @@ const Consulenza = ({navigation,route}) => {
             containerStyle={styles.textAreaStyles}
             //onChangeText={onChangeNumber}
             //value={number}
-            placeholder={area.title}
+            onChangeText={(val) => area.value=val}
+            placeholder={area.title+(area.mandatory?'*':'')}
             placeholderTextColor="#000"/>
        );
     }
 
-    
+    const [selected, setSelected] = useState([]);
+
     
     const renderPicker = (select,id) => {
 
                 
         return(
             <View style={styles.pickerContainer}>
-            <Picker
+                <SelectPicker
+			onValueChange={(value) => {
+				// Do anything you want with the value. 
+				// For example, save in state.
+				select.value = value;
+			}}
+            onSelectedStyle={styles.pickerStyle}
+            placeholder={select.title+(select.mandatory?'*':'')}
+            placeholderStyle={styles.pickerStyle}
+			selected={select.value}
+            doneButtonText="OK"
+			>
+			
+			{select.choices.map((val, index) => (
+				<SelectPicker.Item label={val} value={val} key={val} />
+			))}
+
+		</SelectPicker>
+            {/* <Picker
                 selectedValue={currency}
                 onValueChange={currentCurrency => setCurrency(currentCurrency)}
                 style={{padding:0,color:'black',fontSize:10,fontWeight:'400',marginLeft:-10}}
@@ -158,7 +214,7 @@ const Consulenza = ({navigation,route}) => {
                     <Picker.Item label={post} value={post} />
                 ))}
                 
-            </Picker>
+            </Picker> */}
             </View>
         );
     }
@@ -204,7 +260,7 @@ const Consulenza = ({navigation,route}) => {
                 />
                 <Text style={styles.CheckBoxText}>{checkTitle}</Text>
                 </View>
-                <Pressable style={styles.buttonSend}><Text style={styles.sendText}>{sendTitle}</Text></Pressable>
+                <Pressable onPress={sendEmail} style={styles.buttonSend}><Text style={styles.sendText}>{sendTitle}</Text></Pressable>
             </View>
             <Assistenza/>
             </ScrollView>
@@ -218,6 +274,69 @@ const Consulenza = ({navigation,route}) => {
 }
 
 
+const checkMandatory = () => {
+    console.log(' HERE HERE HERE');
+    console.log(' HERE HERE HERE');
+    const { form } = data;
+    for (var i in form){
+        console.log('- '+JSON.stringify(form[i]));
+        var {title,mandatory,value} = form[i];
+        if (mandatory && value === ''){
+            Alert.alert('Errore Form','Campo '+'"'+title+'" obbligatorio');
+            return false;
+        }
+    }
+    //if (!toggleCheckBox) {
+    //    Alert.alert('Errore Form','Accettazione condizioni obbligatorio');
+    //    return false;
+    //}
+
+}
+
+
+const renderBody = () => {
+    var body = data.introEmail+"\n\n";
+    const { form } = data;
+    for (var i in form){
+        console.log('- '+form[i]);
+        var {title,value} = form[i];
+        body += title+': '+value+" \n";
+    }
+
+    return body
+}
+
+
+const sendEmail = () => {
+
+
+    //if (!checkMandatory()) return;
+
+    let url = `mailto:${data.to}`;
+    let body = renderBody();
+
+    // Create email link query
+    const query = qs.stringify({
+        subject: 'Richiesta Form: '+data.form[0].value+' '+data.form[1].value,
+        body: body,
+        cc: data.cc,
+        //bcc: bcc
+    });
+
+    if (query.length) {
+        url += `?${query}`;
+    }
+    console.log('URL FORM: '+url);
+    // check if we can use this link
+    //const canOpen = await Linking.canOpenURL(url);
+
+    //if (!canOpen) {
+        //throw new Error('Provided URL can not be handled');
+   // }
+
+    return Linking.openURL(url);
+}
+
 
 const styles = StyleSheet.create({
     emptySpace: {
@@ -228,17 +347,17 @@ const styles = StyleSheet.create({
     },
     buttonSend:{
         backgroundColor:Colors.redCondor,
-        width:innnerDettaglio/2.4,
+        width:innnerDettaglio/1.7,
         alignSelf:'center',
         padding:14,
         marginTop:30,
-        marginBottom:20
+        marginBottom:20,
     },
     pickerStyle:{
         padding:0,
         color:'black',
-        fontSize:10,
-        marginLeft:-10,
+        fontSize:16,
+        marginLeft:-5,
         fontFamily:'SybillaPro-Bold',
         border:0,
     },
@@ -256,27 +375,36 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     orariAssistenzaStyle:{
-
+        fontFamily:'OpenSans-Regular',
+        fontSize:14
     },
     telefonoAssistenzaStyle:{
         color:'white',
-        fontSize:20
+        fontSize:22,
+        fontFamily:'SybillaPro-Bold'
     },
     sendText:{
         textAlign:'center',
         color:'white',
-        fontSize:15,
+        fontSize:20,
+        fontFamily:'SybillaPro-Bold'
     },
     condizioniConsulenza: {
         marginTop:20,
-        marginBottom:20
+        marginBottom:20,
+        color:'black',
+        fontFamily:'OpenSans-Regular',
+        fontSize:12
     },
     disclaimerAssistenza: {
         color:'black',
-        fontSize:22
+        fontSize:26,
+        fontFamily:'SybillaPro-Bold'
     },
     CheckBoxText:{
-
+        color:'black',
+        fontSize:14,
+        fontFamily:'OpenSans-Regular'
     },
     iconTelefono:{
         width:40,
@@ -330,7 +458,8 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         color:'black',
         fontFamily:'OpenSans-Bold',
-        fontSize:Fonts.introFont
+        fontSize:Fonts.introFont,
+        marginBottom:15
     },
     consulenzaTitolo:{
         color:'black',

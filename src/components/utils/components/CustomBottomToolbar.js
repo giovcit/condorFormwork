@@ -34,8 +34,9 @@ const CustomBottomToolbar = () => {
       title="Cerca"
       
       IconElement={<><Image resizeMode="cover" style={styles.tbAction} source={require('../../../img/tb-cerca.png')}/><Text style={styles.tbText}>Cerca</Text></>}
-      onPress={(index, propsOfThisAction) =>
-        console.warn(index + ' ' + JSON.stringify(propsOfThisAction))}
+      onPress={() =>
+        navigation.navigate('Cerca')
+        }
     />
     <BottomToolbar.Action
       title="Soluzioni"

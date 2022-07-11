@@ -27,6 +27,7 @@ import Blog from './src/screens/Blog';
 import DettaglioBlog from './src/screens/DettaglioBlog';
 import Consulenza from './src/screens/Consulenza';
 import Contatti from './src/screens/Contatti';
+import Cerca from './src/screens/Cerca';
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,11 @@ console.log(navigation);
           <Stack.Screen
             name="Menu"
             component={Menu}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Cerca"
+            component={Cerca}
             options={{ headerShown: false }}
           />
         <Stack.Screen
