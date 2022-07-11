@@ -46,7 +46,6 @@ const Feed = () => {
         <Pressable 
         onPress={() =>
             navigation.navigate('DettaglioBlog',{
-              lang:'it',
               dataBlog:post,
               nameSoluzione:'Blog'
             })

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { 
     SafeAreaView,
@@ -22,6 +22,7 @@ const innerSpaceCard = win.width-60;
 const Cerca = () => {
     const dispatch = useDispatch();
     dispatch(setCurrentScreen('Menu'));
+    const [cercaString,setCercaString] = useState('');
     const navigation = useNavigation();
     
     return (
@@ -36,7 +37,12 @@ const Cerca = () => {
             <TextInput
               style={styles.inputCerca}
               placeholder="Costa stai cercando?"
-              onSubmitEditing={() => alert('Vai ai risultati')}
+              onChangeText={(value) => {
+                setCercaString(value);
+              }}
+              onSubmitEditing={() => navigation.navigate('CercaList',{
+                cercaString:cercaString
+              })}
             />
             </ScrollView>
           

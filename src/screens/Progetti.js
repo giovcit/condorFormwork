@@ -45,7 +45,6 @@ const Dettaglio = () => {
         <Pressable 
         onPress={() =>
             navigation.navigate('DettaglioProgetto',{
-              lang:'it',
               dataProgetto:post,
               nameSoluzione:'Progetti di rilievo'
             })
