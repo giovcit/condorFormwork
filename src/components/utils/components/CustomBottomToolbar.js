@@ -51,10 +51,10 @@ const CustomBottomToolbar = () => {
     />
     <BottomToolbar.Action
       title="AR"
-      
       IconElement={<><Image resizeMode="cover" style={styles.tbAction} source={require('../../../img/tb-ar.png')}/><Text style={styles.tbText}>AR</Text></>}
-      onPress={(index, propsOfThisAction) =>
-        console.warn(index + ' ' + JSON.stringify(propsOfThisAction))}
+      onPress={() =>
+        navigation.navigate('AR')
+        }
     />
     <BottomToolbar.Action
       title="JustScaff"
