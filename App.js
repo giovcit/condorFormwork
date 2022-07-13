@@ -29,7 +29,7 @@ import Consulenza from './src/screens/Consulenza';
 import Contatti from './src/screens/Contatti';
 import Cerca from './src/screens/Cerca';
 import CercaList from './src/screens/CercaList';
-import AR from './src/screens/AR';
+import AR, { figment } from './src/screens/AR';
 
 const Stack = createStackNavigator();
 

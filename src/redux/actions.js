@@ -73,3 +73,11 @@ export const setCurrentScreen = component => dispatch => {
     payload: component,
   });
 };
+
+// action to show / hide AR Initialization UI to guide user to move device around                                                                                                                          
+export function ARTrackingInitialized(trackingNormal) {
+  return {
+    type: 'AR_TRACKING_INITIALIZED',
+    trackingNormal: trackingNormal,
+  };
+}
